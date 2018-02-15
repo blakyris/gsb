@@ -1,0 +1,19 @@
+{% block sidebar %}
+
+<div class="sidebar-wrapper">
+
+  <div class="sidebar-user-profile">
+    <div class="sidebar-user-picture" style="background-image: url({{ asset('media/img/default-user-picture.jpg') }});"></div>
+    <p class="sidebar-user-name">Sebastien Mercier</p>
+    <p class="sidebar-user-role">Administrateur</p>
+  </div>
+
+  <ul class="sidebar-nav">
+    <li class="sidebar-menu-item">
+      <a href="{{ url('products_list') }}"><i class="fas fa-angle-right"></i>Liste des médicaments</a>
+    </li>
+  </ul>
+
+</div>
+
+{% endblock %}
