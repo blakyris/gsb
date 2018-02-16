@@ -1,9 +1,16 @@
 security:
-    providers:
-        in_memory: { memory: ~ }
-    firewalls:
-        main:
-            anonymous: ~
-            form_login:
-                login_path: login
-                check_path: login
+  encoders:
+    App\Entity\User:
+      algorithm: bcrypt
+
+  providers:
+    db_provider:
+      entity:
+        class: App\Entity\User
+        property: username
+
+  firewalls:
+    main:
+      pattern:    ^/
+      anonymous: ~
+      provider: db_provider
