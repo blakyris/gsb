@@ -21,6 +21,8 @@
         </div>
       {% endif %}
 
+      <h3 class="login-form-title text-center">Connexion</h3>
+
       <form action="{{ url('login') }}" method="post">
           <div class="login-form-item">
             <input type="text" id="username" name="_username" value="{{ last_username }}" placeholder="Nom d'utilisateur"/>
@@ -30,7 +32,7 @@
           </div>
           <input type="hidden" name="_target_path" value="/account" />
           <div class="login-form-item">
-            <button class="btn" type="submit">Se connecter</button>
+            <button class="btn blue-btn square-btn" type="submit">Connexion</button>
           </div>
       </form>
     </div>

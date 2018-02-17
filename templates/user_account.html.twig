@@ -6,6 +6,15 @@
 
   <h2>Mon compte</h2>
 
-  
+  <div class="user-account">
+    <div class="user-account-banner">
+      <img src="{{ asset('media/img/default-user-picture.jpg') }}">
+      <div>
+        <h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
+        <a class="btn blue-btn square-btn" href="#">Editer le profil</a>
+        <a class="btn red-btn square-btn" href="#">Se déconnecter</a>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

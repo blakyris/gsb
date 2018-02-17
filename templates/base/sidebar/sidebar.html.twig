@@ -7,10 +7,8 @@
     <p class="sidebar-user-name">{{ app.user.firstname }} {{ app.user.lastname }}</p>
     <p class="sidebar-user-role">{{ app.user.roles[1] }}</p>
     <div class="sidebar-user-account text-center">
-      <a class="btn" href="{{ url('user_account') }}"><i class="fas fa-user"></i>Mon compte</a>
-    </div>
-    <div class="sidebar-user-logout text-center">
-      <a class="btn" href="{{ url('logout') }}"><i class="fas fa-sign-out-alt"></i>Deconnexion</a>
+      <a class="btn blue-btn square-btn" href="{{ url('user_account') }}"><i class="fas fa-user" style="margin-right:10px;"></i>Mon compte</a>
+      <a class="btn red-btn square-btn" href="{{ url('logout') }}"><i class="fas fa-power-off"></i></a>
     </div>
   </div>
 

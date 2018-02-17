@@ -1,6 +1,33 @@
 @import url("desktop.css");
 @import url("mobile.css");
 
+/* UI Elements */
+
+h1, h2, h3, h4, h5 {
+  font-family: 'Lato', sans-serif;
+}
+
+.blue-btn, .blue-btn:hover, .blue-btn:focus
+{
+    color: #FFF;
+    background-color: #5B99CD;
+    outline: none;
+}
+
+.red-btn, .red-btn:hover, .red-btn:focus
+{
+    color: #FFF;
+    background-color: #F95F62;
+    outline: none;
+}
+
+.square-btn
+{
+    border-radius: 0;
+}
+
+/* NAVBAR */
+
 .navbar {
   background-color: #F0F1F5;
 }
@@ -9,9 +36,14 @@
   margin-right: 20px;
   background: none;
   border: none;
+  outline: none;
 }
 
 /* SIDEBAR */
+
+.body-wrapper {
+  padding-top: 58px;
+}
 
 .body-wrapper.toggled {
   padding-left: 20px;
@@ -115,31 +147,6 @@
   width: 100%;
 }
 
-.sidebar-user-account > a,
-.sidebar-user-account > a:hover
-.sidebar-user-account > a:target
-{
-    color: #FFF;
-    background-color: #71A7D1;
-}
-
-.sidebar-user-account > a > i { margin-right: 10px; }
-
-.sidebar-user-logout {
-  margin-top: 20px;
-  width: 100%;
-}
-
-.sidebar-user-logout > a,
-.sidebar-user-logout > a:hover
-.sidebar-user-logout > a:target
-{
-    color: #FFF;
-    background-color: #D24344;
-}
-
-.sidebar-user-logout > a > i { margin-right: 10px; }
-
 /* LOGIN FORM */
 
 .login-form-wrapper {
@@ -168,6 +175,11 @@
   margin: 20px 0 30px 0;
 }
 
+.login-form-title {
+  color: #153F68;
+  margin-bottom: 30px;
+}
+
 .login-form-flash {
   max-width: 400px;
   padding: 10px;
@@ -188,15 +200,44 @@
 }
 
 .login-form-item > input {
-  padding:0;
+  padding: 0;
   width: 100%;
   height: 40px;
   padding: 10px;
+  border: none;
+  border-bottom: 1px solid #153F68;
+  outline: none;
 }
 
 .login-form-item > button {
-  background-color: #7CB0D7;
+  margin-top: 10px;
+  margin-left: 34%;
+}
+
+/* USER ACCOUNT PAGE */
+
+.user-account
+{
+  margin-top: 50px;
+  max-width: 1000px;
+}
+
+.user-account-banner
+{
+  background-color: #153F68;
   color: #FFF;
+  padding:20px;
+}
+
+.user-account-banner > img
+{
+  float: left;
+  height: 100px;
+  margin-right: 20px;
+}
+
+.user-account-banner > div > a.btn {
+  margin-bottom: 5px;
 }
 
 /* MEDICAMENTS LIST */
@@ -208,7 +249,7 @@
 }
 
 .medicaments-list > table > thead {
-  background-color: #7CB0D7;
+  background-color: #5B99CD;
   color: #FFF;
   text-align: center;
   font-size: 20px;
@@ -231,12 +272,11 @@
   padding: 20px 20px;
 }
 
-.medicaments-list > table > tbody > tr > td > a
-.medicaments-list > table > tbody > tr > td > a:hover,
-.medicaments-list > table > tbody > tr > td > a:target {
+a.medicaments-list-btn,
+a.medicaments-list-btn:hover {
   background-color: inherit;
-  border-color: #7CB0D7;
-  color: #7CB0D7;
+  border: 1px solid #5B99CD;
+  color: #5B99CD;
 }
 
 @media( min-width:768px )
