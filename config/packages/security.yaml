@@ -17,8 +17,12 @@ security:
       form_login:
         login_path: /login
         check_path: /login
+      logout:
+        invalidate_session: true
+        path: /logout
+        target: /login
 
   access_control:
     - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-    - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+    - { path: ^/register, roles: [ROLE_ADMIN, ROLE_MANAGER] }
     - { path: ^/, roles: ROLE_USER }

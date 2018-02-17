@@ -35,7 +35,7 @@ class UserType extends AbstractType
                'expanded' => true, // render check-boxes
                'choices' => [
                    'Administrateur' => 'ROLE_ADMIN',
-                   'Direction' => 'ROLE_MANAGERS',
+                   'Direction' => 'ROLE_MANAGER',
                    'Comptabilite' => 'ROLE_ACCOUNTING',
                    'Commercial' => 'ROLE_MARKETING',
                    'Docteur' => 'ROLE_DOCTOR',

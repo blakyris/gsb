@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+
+<html>
+{% include('base/head/head.html.twig') %}
+
+<body>
+
+  {{ include('base/navbar/navbar-nomenu.html.twig') }}
+
+  <div class="body-wrapper">
+    <div class="content-wrapper">
+      <div class="container-fluid">
+        {% block content %}
+
+        {% endblock %}
+      </div>
+    </div>
+  </div>
+
+  {{ include('base/footer/footer.html.twig') }}
+
+</body>
+
+</html>
