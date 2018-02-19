@@ -1,19 +1,69 @@
-{% set page_title = 'Inscription' %}
+{% set page_title = 'Enregistrer un utilisateur' %}
 
-{% extends 'base/base-nosidebar.html.twig' %}
+{% extends 'base/base.html.twig' %}
 
 {% block content %}
 
-{{ form_start(form) }}
-  {{ form_row(form.firstname) }}
-  {{ form_row(form.lastname) }}
-  {{ form_row(form.birthdate) }}
-  {{ form_row(form.username) }}
-  {{ form_row(form.email) }}
-  {{ form_row(form.plainPassword.first) }}
-  {{ form_row(form.plainPassword.second) }}
+<h2>Gestion des utilisateurs</h2>
 
-  <button type="submit">Register!</button>
-{{ form_end(form) }}
+<button type="button" class="btn blue-btn square-btn" data-toggle="modal" data-target="#createUserModal">
+  Créer un nouvel utilisateur
+</button>
+
+<div class="medicaments-list">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nom complet</th>
+        <th>Email</th>
+        <th>Role</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <th scope="row">{{ u.id }}</th>
+        <td>{{ u.firstname }} {{ u.lastname }}</td>
+        <td>{{ u.email }}</td>
+        <td>{% for r in u.roles %} {{ r }}, {% endfor %}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+
+
+
+<!-- Modal -->
+<div class="modal fade user-edit-box" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Editer le profil</h5>
+      </div>
+      <div class="modal-body">
+
+      {{ form_start(form, {'attr': {'id': 'createUserForm', 'class': 'create-user-form'}}) }}
+        {{ form_row(form.firstname) }}
+        {{ form_row(form.lastname) }}
+        {{ form_row(form.birthdate) }}
+        {{ form_row(form.username) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.plainPassword.first) }}
+        {{ form_row(form.plainPassword.second) }}
+        {% if 'ROLE_ADMIN' in app.user.roles %}
+          {{ form_row(form.roles) }}
+        {% endif %}
+      {{ form_end(form) }}
+
+      <div class="modal-footer">
+        <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Annuler</button>
+        <button type="submit" class="btn blue-btn square-btn" form="createUserForm">Créer l'utilisateur</button>
+      </div>
+    </div>
+  </div>
+</div>
 
 {% endblock %}

@@ -1,1 +1,11 @@
+@media screen and ( max-width:768px )
+{
+  .navbar-fix {
+    top:0;
+  }
 
+  .login-form {
+      top: 0;
+  }
+
+}

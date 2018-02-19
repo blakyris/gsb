@@ -8,13 +8,25 @@
   integrity="sha384-VspmFJ2uqRrKr3en+IG0cIq1Cl/v/PHneDw6SQZYgrcr8ZZmZoQ3zhuGfMnSR/F2"
   crossorigin="anonymous">
   </script>
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
   <script>
       $("#menu-toggle").click(function(e) {
         e.preventDefault();
         $(".body-wrapper").toggleClass("toggled");
       });
+  </script>
+
+  <!-- Initialize Bootstrap functionality -->
+  <script>
+  // Initialize tooltip component
+  $(function () {
+    $('[data-toggle="tooltip"]').tooltip()
+  })
+
+  // Initialize popover component
+  $(function () {
+    $('[data-toggle="popover"]').popover()
+  })
   </script>
 
 {% endblock %}

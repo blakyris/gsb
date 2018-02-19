@@ -18,7 +18,12 @@ class RegistrationController extends Controller
     {
         // build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user, array(
+          'is_admin' => $this->isGranted('ROLE_ADMIN'),
+        ));
+
+        $usersRepo = $this->getDoctrine()->getRepository(User::class);
+        $users = $usersRepo->findAll();
 
         // handle the submit (will only happen on POST)
         $form->handleRequest($request);
@@ -36,12 +41,12 @@ class RegistrationController extends Controller
             // ... do any other work - like sending them an email, etc
             // maybe set a "flash" success message for the user
 
-            return $this->redirectToRoute('user_account');
+            return $this->redirectToRoute('user_registration');
         }
 
-        return $this->render(
-            'security/register.html.twig',
-            array('form' => $form->createView())
-        );
+        return $this->render('security/register.html.twig', array(
+          'form' => $form->createView(),
+          'users' => $users
+        ));
     }
 }

@@ -1,18 +1,65 @@
 {% set page_title = 'Mon compte' %}
 
-{% extends 'base/base.html.twig' %}
+{% extends 'base/base-nopadding.html.twig' %}
 
 {% block content %}
 
-  <h2>Mon compte</h2>
+  <div class="user-profile">
 
-  <div class="user-account">
-    <div class="user-account-banner">
-      <img src="{{ asset('media/img/default-user-picture.jpg') }}">
-      <div>
+    <div class="user-profile-banner">
+      <div class="user-profile-picture">
+        <img src="{{ asset('media/img/default-user-picture.jpg') }}">
+      </div>
+      <div class="">
         <h3>{{ app.user.firstname }} {{ app.user.lastname }}</h3>
-        <a class="btn blue-btn square-btn" href="#">Editer le profil</a>
-        <a class="btn red-btn square-btn" href="#">Se déconnecter</a>
+        <button type="button" class="btn blue-btn square-btn" data-toggle="modal" data-target="#editAccountModal">
+          Editer le profil
+        </button>
+      </div>
+    </div>
+
+    <div class="user-profile-details">
+    {% for role in app.user.roles %}
+      <p>{{ role }}</p>
+    {% endfor %}
+
+    </div>
+
+  </div>
+
+  <!-- Button trigger modal -->
+
+  <!-- Modal -->
+  <div class="modal fade user-edit-box" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="editAccountModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Editer le profil</h5>
+        </div>
+        <div class="modal-body">
+
+        {{ form_start(form, {'attr': {'id': 'userEditForm', 'class': 'user-edit-form'}}) }}
+          <p>Prenom</p>
+          {{ form_row(form.firstname) }}
+          <p>Nom de famille</p>
+          {{ form_row(form.lastname) }}
+          <p>Date de naissance</p>
+          {{ form_row(form.birthdate) }}
+          <p>Nom d'utilisateur</p>
+          {{ form_row(form.username) }}
+          <p>Adresse electronique</p>
+          {{ form_row(form.email) }}
+          {% if 'ROLE_ADMIN' in app.user.roles %}
+          <p>Roles</p>
+            {{ form_row(form.roles) }}
+          {% endif %}
+        {{ form_end(form, {'render_rest': false}) }}
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn blue-btn square-btn" form="userEditForm">Enregistrer les modifications</button>
+        </div>
       </div>
     </div>
   </div>

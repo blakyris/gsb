@@ -13,6 +13,11 @@
   </div>
 
   <ul class="sidebar-nav">
+    {% if 'ROLE_ADMIN' in app.user.roles or 'ROLE_MANAGER' in app.user.roles %}
+    <li class="sidebar-menu-item">
+      <a href="{{ url('user_registration') }}"><i class="fas fa-angle-right"></i>Gestion des utilisateurs</a>
+    </li>
+    {% endif %}
     <li class="sidebar-menu-item">
       <a href="{{ url('products_list') }}"><i class="fas fa-angle-right"></i>Liste des médicaments</a>
     </li>
