@@ -1,0 +1,47 @@
+{% set page_title = 'Créer le super utilisateur' %}
+
+{% extends 'base/base-empty-nopadding.html.twig' %}
+
+{% block content %}
+
+  {% if app.user == null %}
+
+  <div class="login-form-wrapper">
+    <div class="login-form">
+
+      <div class="login-form-logo" style="background-image: url({{ asset('media/img/logo-gsb.png') }});">
+      </div>
+
+      <h3 class="login-form-title text-center">Créer l'administrateur</h3>
+
+      <div class="form-wrapper">
+        {{ form_start(form, {'attr': {'id': 'createUserForm', 'class': 'create-user-form'}}) }}
+          {{ form_row(form.firstname) }}
+          {{ form_row(form.lastname) }}
+          <p>Date de naissance</p>
+          {{ form_row(form.birthdate) }}
+          {{ form_row(form.username) }}
+          {{ form_row(form.email) }}
+          {{ form_row(form.plainPassword.first) }}
+          {{ form_row(form.plainPassword.second) }}
+          {{ form_row(form.roles) }}
+        {{ form_end(form) }}
+      </div>
+
+      <button type="submit" class="btn blue-btn square-btn" form="createUserForm">Créer l'utilisateur</button>
+
+    </div>
+  </div>
+
+  {% else %}
+
+  <div class="login-form-wrapper">
+    <div class="login-form">
+      <p>Vous n'êtes pas autorisé a accéder a cette ressource.</p>
+      <meta http-equiv="refresh" content="3;url={{ url('user_account') }}">
+    </div>
+  </div>
+
+  {% endif %}
+
+{% endblock %}

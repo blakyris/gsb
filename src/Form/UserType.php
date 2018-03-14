@@ -19,7 +19,7 @@ class UserType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-          if ($options['is_admin'])
+          if ($options['is_admin'] || $options['is_fresh_install'])
           {
             $builder
                ->add('roles', ChoiceType::class, array (
@@ -87,6 +87,7 @@ class UserType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => User::class,
+            'is_fresh_install' => false,
             'is_admin' => false
         ));
     }

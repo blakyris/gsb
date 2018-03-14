@@ -5,29 +5,91 @@
 
 {% block content %}
 
-<h2>Liste des medicaments</h2>
+<h2 class="text-center" style="margin-top:20px;">Médicaments</h2>
 
-<div class="medicaments-list">
-  <table class="table table-striped">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nom</th>
-        <th>Description</th>
-        <th></th>
-      </tr>
-    </thead>
-    <tbody>
-      {% for product in products %}
-      <tr>
-        <th scope="row">{{ product.id }}</th>
-        <td>{{ product.name }}</td>
-        <td>{{ product.description }}</td>
-        <td><a href="{{ url('product_detail', { 'id': product.id }) }}" class="btn medicaments-list-btn">Details</a></td>
-      </tr>
-      {% endfor %}
-    </tbody>
-  </table>
-</div>
+<button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#productAddModal">
+  Ajouter un produit
+</button>
 
-{% endblock %}
+<div class="products-list">
+  {% for product in products %}
+
+  <div class="list-item">
+    <div class="list-item-thumbnail" style="background-image:url('{{ absolute_url(asset('/media/img/products-thumbnails/doliprane.png')) }}');"></div>
+    <div class="list-item-footer">
+      <div class="list-item-details">
+        <h4>{{ product.name }}</h4>
+        <div class="list-item-price">
+          <p>{{ product.price }} €<p>
+          </div>
+        </div>
+        <div class="list-item-action">
+          <div class="btn-group text-center">
+            <button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#productDetailModal-{{ product.id }}"><i class="fas fa-angle-double-right fa-margin-right"></i>Détails</button>
+            <button type="button" class="btn darkblue-btn dropdown-toggle dropdown-toggle-split square-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <span class="sr-only">Toggle Dropdown</span>
+            </button>
+            <div class="dropdown-menu">
+              <a class="dropdown-item" href="#"><i class="far fa-edit fa-margin-right"></i>Modifier le produit</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item text-danger" href="{{ url('delete_product', { 'id': product.id }) }}"><i class="far fa-trash-alt fa-margin-right"></i>Supprimer</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Product Details Modal -->
+    <div class="modal fade product-details-modal" id="productDetailModal-{{ product.id }}" tabindex="-1" role="dialog" aria-labelledby="productDetailModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productDetailModalLabel">{{ product.name }}</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="single-product-thumbnail" style="background-image:url('{{ absolute_url(asset('/media/img/products-thumbnails/doliprane.png')) }}');"></div>
+            <div class="single-product-details">
+
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+
+    <!-- Product Add Modal -->
+    <div class="modal fade modal-form" id="productAddModal" tabindex="-1" role="dialog" aria-labelledby="productAddModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="productAddModalLabel">Ajouter un produit</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+
+            {{ form_start(form, {'attr': {'id': 'createProductForm', 'class': 'create-product-form'}}) }}
+              {{ form_row(form.name) }}
+              {{ form_row(form.price) }}
+            {{ form_end(form) }}
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+            <button type="submit" class="btn blue-btn square-btn" form="createProductForm">Ajouter le produit</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  {% endblock %}

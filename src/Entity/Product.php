@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Entity\ProductType;
+use App\Entity\Manufacturer;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductRepository")
@@ -22,24 +24,32 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $description;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProductType", inversedBy="products")
+     * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
      */
-    private $manufacturerId;
+    private $type;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="products")
+     * @ORM\JoinColumn(name="manufacturer_id", referencedColumnName="id", nullable=true)
      */
-    private $productTypeId;
+    private $manufacturer;
 
     /**
-     * @ORM\Column(type="integer", nullable=false)
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $price;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $quantity;
+
 
     // GETTERS
 
@@ -58,19 +68,24 @@ class Product
         return $this->description;
     }
 
-    public function getProductTypeId()
+    public function getType(): ProductType
     {
-        return $this->productTypeId;
+        return $this->type;
     }
 
-    public function getManufacturerId()
+    public function getManufacturer(): Manufacturer
     {
-        return $this->manufacturerId;
+        return $this->manufacturer;
     }
 
     public function getPrice()
     {
         return $this->price;
+    }
+
+    public function getQuantity()
+    {
+        return $this->quantity;
     }
 
     // SETTERS
@@ -85,9 +100,9 @@ class Product
         $this->description = $description;
     }
 
-    public function setManufacturerId($manufacturerId)
+    public function setManufacturer($manufacturer)
     {
-        $this->manufacturerId = $manufacturerId;
+        $this->manufacturer = $manufacturer;
     }
 
     public function setPrice($price)
@@ -95,8 +110,13 @@ class Product
         $this->price = $price;
     }
 
-    public function setProductTypeId($productTypeId)
+    public function setQuantity($quantity)
     {
-        $this->productTypeId = $productTypeId;
+        $this->quantity = $quantity;
+    }
+
+    public function setTypw(ProductType $type)
+    {
+        $this->type = $type;
     }
 }

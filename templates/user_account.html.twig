@@ -19,25 +19,21 @@
     </div>
 
     <div class="user-profile-details">
-    {% for role in app.user.roles %}
-      <p>{{ role }}</p>
-    {% endfor %}
+      <div>
 
+      </div>
     </div>
 
   </div>
 
-  <!-- Button trigger modal -->
-
-  <!-- Modal -->
-  <div class="modal fade user-edit-box" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="editAccountModalLabel" aria-hidden="true">
+  <!-- Edit Account Modal -->
+  <div class="modal fade modal-form" id="editAccountModal" tabindex="-1" role="dialog" aria-labelledby="editAccountModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Editer le profil</h5>
+          <h5 class="modal-title" id="editAccountModal">Editer le profil</h5>
         </div>
         <div class="modal-body">
-
         {{ form_start(form, {'attr': {'id': 'userEditForm', 'class': 'user-edit-form'}}) }}
           <p>Prenom</p>
           {{ form_row(form.firstname) }}
@@ -55,7 +51,6 @@
           {% endif %}
         {{ form_end(form, {'render_rest': false}) }}
         </div>
-
         <div class="modal-footer">
           <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Annuler</button>
           <button type="submit" class="btn blue-btn square-btn" form="userEditForm">Enregistrer les modifications</button>

@@ -1,5 +1,31 @@
 @media screen and ( max-width:768px )
 {
+  .body-wrapper {
+    padding-left: 0;
+  }
+
+  .body-wrapper.toggled {
+    padding-left: 250px;
+  }
+
+  .sidebar-wrapper {
+    width: 0;
+  }
+
+  .body-wrapper.toggled .sidebar-wrapper {
+    width: 250px;
+  }
+
+  .content-wrapper {
+    padding: 20px;
+    position: relative;
+  }
+
+  .body-wrapper.toggled .content-wrapper {
+    position: relative;
+    margin-right: 0;
+  }
+
   .navbar-fix {
     top:0;
   }

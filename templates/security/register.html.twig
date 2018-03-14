@@ -10,7 +10,7 @@
   Créer un nouvel utilisateur
 </button>
 
-<div class="medicaments-list">
+<div class="table-wrapper">
   <table class="table table-striped">
     <thead>
       <tr>
@@ -27,6 +27,7 @@
         <td>{{ u.firstname }} {{ u.lastname }}</td>
         <td>{{ u.email }}</td>
         <td>{% for r in u.roles %} {{ r }}, {% endfor %}</td>
+        <td><a href="{{ url('delete_user', { 'id': u.id }) }}">Supprimer cet utilisateur</td>
       </tr>
       {% endfor %}
     </tbody>
@@ -37,17 +38,18 @@
 
 
 <!-- Modal -->
-<div class="modal fade user-edit-box" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true">
+<div class="modal fade modal-form" id="createUserModal" tabindex="-1" role="dialog" aria-labelledby="createUserModal" aria-hidden="true">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Editer le profil</h5>
+        <h5 class="modal-title" id="createUserModal">Créer un nouvel utilisateur</h5>
       </div>
       <div class="modal-body">
 
       {{ form_start(form, {'attr': {'id': 'createUserForm', 'class': 'create-user-form'}}) }}
         {{ form_row(form.firstname) }}
         {{ form_row(form.lastname) }}
+        <p>Date de naissance</p>
         {{ form_row(form.birthdate) }}
         {{ form_row(form.username) }}
         {{ form_row(form.email) }}
@@ -58,6 +60,7 @@
         {% endif %}
       {{ form_end(form) }}
 
+      </div>
       <div class="modal-footer">
         <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Annuler</button>
         <button type="submit" class="btn blue-btn square-btn" form="createUserForm">Créer l'utilisateur</button>

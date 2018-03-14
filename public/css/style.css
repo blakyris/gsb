@@ -4,7 +4,13 @@
 /* UI Elements */
 
 h1, h2, h3, h4, h5 {
-  font-family: 'Lato', sans-serif;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+.btn:focus, .btn:active:focus, .btn.active:focus{
+    outline:none;
+    box-shadow:none;
 }
 
 .blue-btn, .blue-btn:hover, .blue-btn:focus
@@ -14,19 +20,177 @@ h1, h2, h3, h4, h5 {
     outline: none;
 }
 
-.red-btn, .red-btn:hover, .red-btn:focus
+.darkblue-btn, .darkblue-btn:hover, .darkblue-btn:focus
 {
+    color: #FFF;
+    background-color: #153F68;
+    outline: none;
+}
+
+.red-btn, .red-btn:hover, .red-btn:focus {
     color: #FFF;
     background-color: #F95F62;
     outline: none;
 }
 
-.square-btn
-{
+.blue-outline-btn,
+.blue-outline-btn:hover {
+    background-color: inherit;
+    border: 1px solid #5B99CD;
+    color: #5B99CD;
+}
+
+.square-btn {
     border-radius: 0;
 }
 
-/* NAVBAR */
+.fa-margin-right {
+  margin-right: 10px;
+}
+
+/* Tables */
+
+.table-wrapper {
+  margin: 0 auto;
+  margin-top:50px;
+  max-width: 1000px;
+  overflow-x:auto;
+}
+
+.table-wrapper > table {
+  border-collapse: collapse;
+}
+
+.table-wrapper > table > thead {
+  background-color: #5B99CD;
+  color: #FFF;
+  text-align: center;
+  font-size: 20px;
+}
+
+.table-wrapper > table > tbody {
+  text-align: justify;
+}
+
+.table-wrapper > table > thead > tr > th,
+.table-wrapper > table > tbody > tr > th,
+.table-wrapper > table > tbody > tr > td
+{
+  border: none;
+}
+
+.table-wrapper > table > tbody > tr > th,
+.table-wrapper > table > tbody > tr > td
+{
+  padding: 20px 20px;
+}
+
+/* Forms */
+
+.form-wrapper form {
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-wrapper form > p {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  color: #153F68;
+}
+
+.form-wrapper form > div {
+  padding: 5px 0;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.form-wrapper form > div > input {
+  width: 100%;
+  padding: 5px 5px;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+}
+
+.form-wrapper form > div > div > select {
+  appearance: none;
+  padding: 5px 5px;
+  margin-right: 10px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.form-wrapper form > div > select {
+  width: 100%;
+  padding: 5px 5px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Forms in modals */
+
+.modal-form .modal-header {
+  background-color: #153F68;
+  color: #FFF;
+}
+
+.modal-form form {
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-form form > p {
+  font-family: 'Roboto', sans-serif;
+  margin: 0;
+  color: #153F68;
+}
+
+.modal-form form > div {
+  padding: 5px 0;
+  margin-bottom: 20px;
+  width: 100%;
+}
+
+.modal-form form > div > input {
+  width: 100%;
+  padding: 5px 5px;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+}
+
+.modal-form form > div > div > select {
+  appearance: none;
+  padding: 5px 5px;
+  margin-right: 10px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+.modal-form form > div > select {
+  width: 100%;
+  padding: 5px 5px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Navbar */
 
 .navbar {
   background-color: #F0F1F5;
@@ -39,7 +203,7 @@ h1, h2, h3, h4, h5 {
   outline: none;
 }
 
-/* SIDEBAR */
+/* Body Wrapper */
 
 .body-wrapper {
   padding-top: 58px;
@@ -48,6 +212,21 @@ h1, h2, h3, h4, h5 {
 .body-wrapper.toggled {
   padding-left: 20px;
 }
+
+/* Content Wrapper */
+
+.content-wrapper {
+  width: 100%;
+  position: absolute;
+  padding: 15px;
+}
+
+.body-wrapper.toggled .content-wrapper {
+  position: absolute;
+  margin-right: -250px;
+}
+
+/* Sidebar */
 
 .sidebar-wrapper {
   z-index: 1000;
@@ -65,18 +244,6 @@ h1, h2, h3, h4, h5 {
   width: 250px;
   box-shadow: 9px 0px 10px -6px rgba(0,0,0,0.50);
 }
-
-.content-wrapper {
-  width: 100%;
-  position: absolute;
-  padding: 15px;
-}
-
-.body-wrapper.toggled .content-wrapper {
-  position: absolute;
-  margin-right: -250px;
-}
-
 
 /* Sidebar Styles */
 
@@ -98,6 +265,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .sidebar-user-name {
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   margin: 0;
   font-size: 18px;
@@ -105,6 +273,7 @@ h1, h2, h3, h4, h5 {
 }
 
 .sidebar-user-role {
+  font-family: 'Roboto', sans-serif;
   text-align: center;
   margin:0;
 }
@@ -123,6 +292,8 @@ h1, h2, h3, h4, h5 {
 }
 
 .sidebar-nav li a {
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
   display: block;
   text-decoration: none;
   color: #FFF;
@@ -148,7 +319,7 @@ h1, h2, h3, h4, h5 {
   width: 100%;
 }
 
-/* LOGIN FORM */
+/* LOGIN PAGE */
 
 .login-form-wrapper {
   background-color: #153F68;
@@ -246,7 +417,7 @@ h1, h2, h3, h4, h5 {
   border-radius: 50%;
 }
 
-.user-profile-banner > div > a.btn {
+.user-profile-banner > div > button {
   margin-bottom: 5px;
   margin-top: 20px;
 }
@@ -255,165 +426,73 @@ h1, h2, h3, h4, h5 {
   padding: 20px;
 }
 
-.user-edit-box .modal-header {
-  background-color: #153F68;
-  color: #FFF;
-
-}
-
-.user-edit-form {
-  font-family: 'Lato', sans-serif;
-}
-
-.user-edit-form > p {
-  margin:0;
-  color: #153F68;
-  font-weight: bold;
-}
-
-.user-edit-form > div {
-  padding: 5px 0;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.user-edit-form > div > input {
-  width: 100%;
-  padding: 5px 5px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
-
-.user-edit-form > div > div > select {
-  padding: 5px 5px;
-  margin-right: 10px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
-
-.user-edit-form > div > select {
-  width: 100%;
-  padding: 5px 5px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
-
 /* REGISTER PAGE */
-
-.user-create-form {
-  font-family: 'Lato', sans-serif;
-}
-
-.create-user-form > div {
-  padding: 5px 0;
-  margin-bottom: 20px;
-  width: 100%;
-}
-
-.create-user-form > div > input {
-  width: 100%;
-  padding: 5px 5px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
-
-.create-user-form > div > div > select {
-  padding: 5px 5px;
-  margin-right: 10px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
-
-.create-user-form > div > select {
-  width: 100%;
-  padding: 5px 5px;
-  border: none;
-  border-bottom: 0.5px solid #153F68;
-  background: #FFF;
-  outline: none;
-}
 
 /* MEDICAMENTS LIST */
 
-.medicaments-list {
-  margin: 0 auto;
-  margin-top:50px;
-  max-width: 1000px;
-  overflow-x:auto;
+.products-list {
+  margin-top: 30px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
 }
 
-.medicaments-list > table {
-  border-collapse: collapse;
+.products-list .list-item
+{
+  width: auto;
+  border:1px solid #F0F1F5;
+  margin: 10px 20px;
+  box-shadow: 2px 2px 25px -11px rgba(0,0,0,0.75);
 }
 
-.medicaments-list > table > thead {
-  background-color: #5B99CD;
+
+.products-list .list-item-thumbnail {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: contain;
+  margin: 20px;
+}
+
+.products-list .list-item-footer {
+    padding: 10px 20px;
+    background-color: #F0F1F5;
+}
+
+.products-list .list-item-action {
+    text-align: center;
+}
+
+.products-list .list-item-details {
+
+}
+
+.products-list .list-item-price {
+  color: #153F68;
+}
+
+.products-list .dropdown-menu {
+    box-shadow: 5px 5px 25px -11px rgba(0,0,0,0.75);
+}
+
+.product-details-modal {
+
+}
+
+.product-details-modal .modal-header {
+  background-color: #153F68;
   color: #FFF;
-  text-align: center;
-  font-size: 20px;
 }
 
-.medicaments-list > table > tbody {
-  text-align: justify;
+.product-details-modal .single-product-thumbnail {
+  width: 200px;
+  height: 200px;
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  margin: 0 auto;
 }
 
-.medicaments-list > table > thead > tr > th,
-.medicaments-list > table > tbody > tr > th,
-.medicaments-list > table > tbody > tr > td
-{
-  border: none;
-}
-
-.medicaments-list > table > tbody > tr > th,
-.medicaments-list > table > tbody > tr > td
-{
-  padding: 20px 20px;
-}
-
-a.medicaments-list-btn,
-a.medicaments-list-btn:hover {
-  background-color: inherit;
-  border: 1px solid #5B99CD;
-  color: #5B99CD;
-}
-
-@media( min-width:768px )
-{
-
-  .body-wrapper {
-    padding-left: 0;
-  }
-
-  .body-wrapper.toggled {
-    padding-left: 250px;
-  }
-
-  .sidebar-wrapper {
-    width: 0;
-  }
-
-  .body-wrapper.toggled .sidebar-wrapper {
-    width: 250px;
-  }
-
-  .content-wrapper {
-    padding: 20px;
-    position: relative;
-  }
-
-  .body-wrapper.toggled .content-wrapper {
-    position: relative;
-    margin-right: 0;
-  }
+.product-details-modal .single-product-details {
 
 }

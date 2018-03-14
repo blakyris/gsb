@@ -5,29 +5,57 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
+use App\Form\ProductType;
 
 class ProductController extends Controller
 {
   /**
   * @Route("/products", name="products_list")
   */
-  public function showAllProducts()
+  public function showAllProducts(Request $request)
   {
+    $product = new Product();
+    $form = $this->createForm(ProductType::class, $product, array(
+      'is_admin' => $this->isGranted('ROLE_ADMIN'),
+    ));
+
     $repository = $this->getDoctrine()->getRepository(Product::class);
     $products = $repository->findAll();
 
-    return $this->render('products_list.html.twig',  array('products' => $products));
+    // handle the submit (will only happen on POST)
+    $form->handleRequest($request);
+    if ($form->isSubmitted() && $form->isValid()) {
+
+        // save the User
+        $em = $this->getDoctrine()->getManager();
+        $em->persist($product);
+        $em->flush();
+
+        // ... do any other work - like sending them an email, etc
+        // maybe set a "flash" success message for the user
+
+        return $this->redirectToRoute('products_list');
+    }
+
+    return $this->render('products_list.html.twig',  array(
+      'products' => $products,
+      'form' => $form->createView(),
+    ));
   }
 
   /**
-  * @Route("/products/details/{id}", name="product_detail")
+  * @Route("/products/delete/{id}", name="delete_product")
   */
-  public function showProductDetails($id)
+  public function deleteProduct($id)
   {
-    $repository = $this->getDoctrine()->getRepository(Product::class);
-    $product = $repository->find($id);
+    $em = $this->getDoctrine()->getManager();
+    $product = $em->getRepository(Product::class)->find($id);
 
-    return $this->render('single_product_detail.html.twig', array('product' => $product));
+    $em->remove($product);
+    $em->flush();
+
+    return $this->redirectToRoute('products_list');
   }
 }

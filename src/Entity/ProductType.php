@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Product;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ProductTypeRepository")
@@ -21,6 +24,11 @@ class ProductType
      */
     private $type;
 
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="type")
+    */
+    private $products;
+
     // GETTERS
 
     public function getId()
@@ -33,10 +41,26 @@ class ProductType
         return $this->type;
     }
 
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
     // SETTERS
 
     public function setType($type)
     {
         $this->type = $type;
     }
+
+    // FUNCTIONS
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
+    }
+
 }

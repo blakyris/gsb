@@ -3,6 +3,9 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
+use App\Entity\Product;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ManufacturerRepository")
@@ -36,6 +39,11 @@ class Manufacturer
      */
     private $country;
 
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="manufacturer")
+    */
+    private $products;
+
     // GETTERS
 
     public function getId()
@@ -63,6 +71,14 @@ class Manufacturer
         return $this->country;
     }
 
+    /**
+     * @return Collection|Product[]
+     */
+    public function getProducts()
+    {
+        return $this->products;
+    }
+
     // SETTERS
 
     public function setName($name)
@@ -83,5 +99,12 @@ class Manufacturer
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    // FUNCTIONS
+
+    public function __construct()
+    {
+        $this->products = new ArrayCollection();
     }
 }
