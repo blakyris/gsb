@@ -3,9 +3,9 @@
 namespace App\Service;
 
 
-class Authenticator
+class Security
 {
-    public function login()
+    public function deleteUser($id)
     {
       
     }

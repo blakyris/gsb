@@ -33,9 +33,6 @@ class ProductController extends Controller
         $em->persist($product);
         $em->flush();
 
-        // ... do any other work - like sending them an email, etc
-        // maybe set a "flash" success message for the user
-
         return $this->redirectToRoute('products_list');
     }
 

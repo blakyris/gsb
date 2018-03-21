@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "63939d67d3d5f1d348b0ba9bae6e62e4",
+    "content-hash": "c65105e84a6b867ae7237a72c1023439",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -1606,16 +1606,16 @@
         },
         {
             "name": "symfony/debug",
-            "version": "v4.0.3",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/debug.git",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f"
+                "reference": "1721e4e7effb23480966690cdcdc7d2a4152d489"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/debug/zipball/9ae4223a661b56a9abdce144de4886cca37f198f",
-                "reference": "9ae4223a661b56a9abdce144de4886cca37f198f",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/1721e4e7effb23480966690cdcdc7d2a4152d489",
+                "reference": "1721e4e7effb23480966690cdcdc7d2a4152d489",
                 "shasum": ""
             },
             "require": {
@@ -1658,7 +1658,7 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2018-01-03T17:15:19+00:00"
+            "time": "2018-02-28T21:50:02+00:00"
         },
         {
             "name": "symfony/dependency-injection",
@@ -3581,16 +3581,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v4.0.4",
+            "version": "v4.0.6",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "6d63cc74f3e2d4961411ccb77389a00332653104"
+                "reference": "c7d89044ed6ed3b7d8b558d509cca0666b947e58"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/6d63cc74f3e2d4961411ccb77389a00332653104",
-                "reference": "6d63cc74f3e2d4961411ccb77389a00332653104",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/c7d89044ed6ed3b7d8b558d509cca0666b947e58",
+                "reference": "c7d89044ed6ed3b7d8b558d509cca0666b947e58",
                 "shasum": ""
             },
             "require": {
@@ -3646,7 +3646,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2018-01-29T09:06:29+00:00"
+            "time": "2018-02-26T15:55:47+00:00"
         },
         {
             "name": "symfony/web-profiler-bundle",
