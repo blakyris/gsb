@@ -24,7 +24,7 @@ class Product
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true)
+     * @ORM\Column(type="text", nullable=true)
      */
     private $description;
 
@@ -50,6 +50,15 @@ class Product
      */
     private $quantity;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $thumbnail;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $dose;
 
     // GETTERS
 
@@ -88,6 +97,16 @@ class Product
         return $this->quantity;
     }
 
+    public function getThumbnail()
+    {
+        return $this->thumbnail;
+    }
+
+    public function getDose()
+    {
+      return $this->dose;
+    }
+
     // SETTERS
 
     public function setName($name)
@@ -115,8 +134,18 @@ class Product
         $this->quantity = $quantity;
     }
 
-    public function setTypw(ProductType $type)
+    public function setType(ProductType $type)
     {
         $this->type = $type;
+    }
+
+    public function setThumbnail($thumbnail)
+    {
+        $this->thumbnail = $thumbnail;
+    }
+
+    public function setDose($dose)
+    {
+        $this->dose = $dose;
     }
 }

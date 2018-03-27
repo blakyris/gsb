@@ -28,8 +28,28 @@
         <td>{{ u.firstname }} {{ u.lastname }}</td>
         <td>{{ u.email }}</td>
         <td>{% for r in u.roles %} {{ r }}, {% endfor %}</td>
-        <td><a href="{{ url('delete_user', { 'id': u.id }) }}">Supprimer cet utilisateur</td>
+        <td><button class="btn red-btn sqaure-btn" type="button" data-toggle="modal" data-target="#deleteUserModal{{ u.id }}">Supprimer</button</td>
       </tr>
+
+      <!-- Delete User Confirmation Modal -->
+      <div class="modal fade modal-danger" tabindex="-1" role="dialog" id="deleteUserModal{{ u.id }}" aria-labelledby="deleteUserModal{{ u.id }}" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteUserModal{{ u.id }}">Supprimer un utilisateur</h5>
+            </div>
+            <div class="modal-body">
+              <p>Vous êtes sur le point de supprimer un utilisateur. Cette action est irréversible et entraine la suppression de toutes les données liées a cet utilisateur.</p>
+              <p>Etes-vous sûr de vouloir continuer ?</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn red-btn" href="{{ url('delete_user', { 'id': u.id }) }}">Supprimer</button>
+              <button type="button" class="btn darkblue-btn" data-dismiss="modal">Annuler</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {% endfor %}
     </tbody>
   </table>
@@ -69,5 +89,8 @@
     </div>
   </div>
 </div>
+
+
+
 
 {% endblock %}

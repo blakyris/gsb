@@ -1,5 +1,6 @@
 
 {% set page_title = 'Liste des médicaments' %}
+{% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ "/media/img/products-thumbnails/" %}
 
 {% extends 'base/base.html.twig' %}
 
@@ -15,7 +16,7 @@
   {% for product in products %}
 
   <div class="list-item">
-    <div class="list-item-thumbnail" style="background-image:url('{{ absolute_url(asset('/media/img/products-thumbnails/doliprane.png')) }}');"></div>
+    <div class="list-item-thumbnail" style="background-image:url('{{ thumbnail_path ~ product.thumbnail }}');"></div>
     <div class="list-item-footer">
       <div class="list-item-details">
         <h4>{{ product.name }}</h4>
@@ -50,7 +51,7 @@
             </button>
           </div>
           <div class="modal-body">
-            <div class="single-product-thumbnail" style="background-image:url('{{ absolute_url(asset('/media/img/products-thumbnails/doliprane.png')) }}');"></div>
+            <div class="single-product-thumbnail" style="background-image:url('{{ thumbnail_path ~ product.thumbnail }}');"></div>
             <div class="single-product-details">
 
             </div>
@@ -78,7 +79,9 @@
 
             {{ form_start(form, {'attr': {'id': 'createProductForm', 'class': 'create-product-form'}}) }}
               {{ form_row(form.name) }}
+              {{ form_row(form.description) }}
               {{ form_row(form.price) }}
+              {{ form_row(form.thumbnail) }}
             {{ form_end(form) }}
 
           </div>

@@ -7,6 +7,8 @@ use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
 
+use App\Entity\CalendarEvents;
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  * @UniqueEntity(fields="email", message="Email already taken")
@@ -67,6 +69,12 @@ class User implements UserInterface, \Serializable
      */
     private $isActive;
 
+    /**
+     * Many Users have Many Events.
+     * @ORM\ManyToMany(targetEntity="CalendarEvents", inversedBy="owners")
+     */
+    private $calendar_events;
+
     // GETTERS
 
     public function getId()
@@ -124,6 +132,11 @@ class User implements UserInterface, \Serializable
      return null;
     }
 
+    public function getCalendarEvents()
+    {
+     return $this->calendar_events;
+    }
+
     // SETTERS
 
     public function setFirstname($firstname)
@@ -167,7 +180,16 @@ class User implements UserInterface, \Serializable
         $this->password = $password;
     }
 
+    public function setCalendarEvents(CalendarEvents $event)
+    {
+        $this->$calendar_events = $event;
+    }
+
     // FUNCTIONS
+
+    public function __construct() {
+        $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+    }
 
     public function resetRoles()
     {
@@ -180,8 +202,6 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt,
         ));
     }
 
@@ -192,8 +212,6 @@ class User implements UserInterface, \Serializable
             $this->id,
             $this->username,
             $this->password,
-            // see section on salt below
-            // $this->salt
         ) = unserialize($serialized);
     }
 

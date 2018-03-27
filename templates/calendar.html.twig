@@ -1,0 +1,65 @@
+{% set page_title = 'Calendrier' %}
+
+{% extends 'base/base.html.twig' %}
+
+{% block content %}
+
+<div class="container calendar-wrapper">
+<div id='calendar' class="calendar">
+
+</div>
+</div>
+
+{% endblock %}
+
+
+{% block footer %}
+
+{{ parent() }}
+
+<script>
+$(document).ready(function() {
+
+  $('#calendar').fullCalendar({
+    locale: 'fr',
+    isRTL: false,
+    firstDay: 1,
+    weekends: false,
+    timezone: "local",
+    businessHours: {
+      dow: [ 1, 2, 3, 4, 5 ],
+      start: '08:00',
+      end: '20:00',
+    },
+    minTime: "08:00:00",
+    maxTime: "20:00:00",
+    defaultView: 'agendaWeek',
+    themeSystem: 'bootstrap4',
+    header: {
+      left:   'month,agendaWeek',
+      center: 'title',
+      right:  'today prev,next'
+    },
+    columnHeaderFormat: 'dddd D',
+    bootstrapFontAwesome: {
+      close: 'fa-times',
+      prev: 'fa-chevron-left',
+      next: 'fa-chevron-right',
+      prevYear: 'fa-angle-double-left',
+      nextYear: 'fa-angle-double-right'
+    },
+    nowIndicator: true,
+    events: '{{ url('calendar_events') }}',
+    eventColor: '#153F68',
+    contentHeight: 'auto',
+    views: {
+      agenda: {
+        titleFormat: 'MMMM YYYY'
+      }
+    }
+  });
+
+});
+</script>
+
+{% endblock %}

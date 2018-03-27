@@ -27,6 +27,13 @@ class ProductController extends Controller
     // handle the submit (will only happen on POST)
     $form->handleRequest($request);
     if ($form->isSubmitted() && $form->isValid()) {
+        $directory = $this->get('kernel')->getRootDir().'/../public/media/img/products-thumbnails/';
+
+        $file = $form['thumbnail']->getData();
+        $extension = $file->guessExtension();
+        $filename = 'thumb'.rand(1, 99999).'.'.$extension;
+        $file->move($directory, $filename);
+        $product->setThumbnail($filename);
 
         // save the User
         $em = $this->getDoctrine()->getManager();

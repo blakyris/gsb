@@ -135,6 +135,13 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto', sans-serif;
 }
 
+/* Danger Modal */
+
+.modal-danger .modal-header {
+  background-color: #F95F62;
+  color: #FFF;
+}
+
 /* Forms in modals */
 
 .modal-form .modal-header {
@@ -189,6 +196,10 @@ h1, h2, h3, h4, h5 {
   outline: none;
   font-family: 'Roboto', sans-serif;
 }
+
+/* Calendar */
+
+
 
 /* Navbar */
 
