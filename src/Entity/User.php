@@ -75,6 +75,11 @@ class User implements UserInterface, \Serializable
      */
     private $calendar_events;
 
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\ExpenseReport", mappedBy="owner")
+    */
+    private $expense_reports;
+
     // GETTERS
 
     public function getId()
@@ -90,6 +95,11 @@ class User implements UserInterface, \Serializable
     public function getLastname()
     {
         return $this->lastname;
+    }
+
+    public function getFullName()
+    {
+      return $this->firstname . ' ' . $this->lastname;
     }
 
     public function getBirthdate()
@@ -137,6 +147,11 @@ class User implements UserInterface, \Serializable
      return $this->calendar_events;
     }
 
+    public function getExpenseReports()
+    {
+      return $this->expense_reports;
+    }
+
     // SETTERS
 
     public function setFirstname($firstname)
@@ -182,13 +197,19 @@ class User implements UserInterface, \Serializable
 
     public function setCalendarEvents(CalendarEvents $event)
     {
-        $this->$calendar_events = $event;
+        $this->calendar_events = $event;
+    }
+
+    public function setExpenseReport(ExpenseReport $report)
+    {
+        $this->expense_reports = $report;
     }
 
     // FUNCTIONS
 
     public function __construct() {
         $this->events = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->expense_reports = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     public function resetRoles()

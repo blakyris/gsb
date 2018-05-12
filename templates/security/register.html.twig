@@ -6,7 +6,7 @@
 
 <h2>Gestion des utilisateurs</h2>
 
-<button type="button" class="btn blue-btn square-btn" data-toggle="modal" data-target="#createUserModal">
+<button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#createUserModal">
   Créer un nouvel utilisateur
 </button>
 
@@ -19,16 +19,24 @@
         <th>Nom complet</th>
         <th>Email</th>
         <th>Role</th>
+        <th>Action</th>
       </tr>
     </thead>
     <tbody>
       {% for u in users %}
       <tr>
-        <th scope="row">{{ u.id }}</th>
+        <td scope="row">{{ u.id }}</td>
         <td>{{ u.firstname }} {{ u.lastname }}</td>
         <td>{{ u.email }}</td>
-        <td>{% for r in u.roles %} {{ r }}, {% endfor %}</td>
-        <td><button class="btn red-btn sqaure-btn" type="button" data-toggle="modal" data-target="#deleteUserModal{{ u.id }}">Supprimer</button</td>
+        <td>
+              {% if "ROLE_ADMIN" in u.roles|keys %} Administrateur {% endif %}
+        </td>
+        <td>
+          <div class="btn-group" role="group" aria-label="Action Group">
+              <button type="button" class="btn darkblue-btn square-btn">Modifier</button>
+              <button class="btn red-btn sqaure-btn" type="button" data-toggle="modal" data-target="#deleteUserModal{{ u.id }}">Supprimer</button>
+          </div>
+        </td>
       </tr>
 
       <!-- Delete User Confirmation Modal -->
@@ -43,7 +51,7 @@
               <p>Etes-vous sûr de vouloir continuer ?</p>
             </div>
             <div class="modal-footer">
-              <button type="button" class="btn red-btn" href="{{ url('delete_user', { 'id': u.id }) }}">Supprimer</button>
+              <a class="btn red-btn" href="{{ url('delete_user', { 'id': u.id }) }}">Supprimer</a>
               <button type="button" class="btn darkblue-btn" data-dismiss="modal">Annuler</button>
             </div>
           </div>

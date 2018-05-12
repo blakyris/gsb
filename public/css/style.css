@@ -8,6 +8,8 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
 }
 
+.bg-grey { background-color: #EEE; }
+
 .btn:focus, .btn:active:focus, .btn.active:focus{
     outline:none;
     box-shadow:none;
@@ -59,6 +61,7 @@ h1, h2, h3, h4, h5 {
 
 .table-wrapper > table {
   border-collapse: collapse;
+  font-family: 'Roboto', sans-serif;
 }
 
 .table-wrapper > table > thead {
@@ -68,21 +71,24 @@ h1, h2, h3, h4, h5 {
   font-size: 20px;
 }
 
+.table-wrapper > table > thead > tr > th {
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+}
+
 .table-wrapper > table > tbody {
   text-align: justify;
 }
 
-.table-wrapper > table > thead > tr > th,
-.table-wrapper > table > tbody > tr > th,
 .table-wrapper > table > tbody > tr > td
 {
+  vertical-align: middle;
+  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 300;
   border: none;
-}
-
-.table-wrapper > table > tbody > tr > th,
-.table-wrapper > table > tbody > tr > td
-{
-  padding: 20px 20px;
 }
 
 /* Forms */
@@ -135,6 +141,13 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto', sans-serif;
 }
 
+/* Default Modal */
+
+.modal .modal-header {
+  background-color: #153F68;
+  color: #FFF;
+}
+
 /* Danger Modal */
 
 .modal-danger .modal-header {
@@ -144,28 +157,23 @@ h1, h2, h3, h4, h5 {
 
 /* Forms in modals */
 
-.modal-form .modal-header {
-  background-color: #153F68;
-  color: #FFF;
-}
-
-.modal-form form {
+.modal form {
   font-family: 'Roboto', sans-serif;
 }
 
-.modal-form form > p {
+.modal form > p {
   font-family: 'Roboto', sans-serif;
   margin: 0;
   color: #153F68;
 }
 
-.modal-form form > div {
+.modal form > div {
   padding: 5px 0;
   margin-bottom: 20px;
   width: 100%;
 }
 
-.modal-form form > div > input {
+.modal form > div > input {
   width: 100%;
   padding: 5px 5px;
   border: none;
@@ -174,7 +182,7 @@ h1, h2, h3, h4, h5 {
   outline: none;
 }
 
-.modal-form form > div > div > select {
+.modal form > div > div > select {
   appearance: none;
   padding: 5px 5px;
   margin-right: 10px;
@@ -186,7 +194,7 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto', sans-serif;
 }
 
-.modal-form form > div > select {
+.modal form > div > select {
   width: 100%;
   padding: 5px 5px;
   border-radius: 0;
@@ -197,9 +205,61 @@ h1, h2, h3, h4, h5 {
   font-family: 'Roboto', sans-serif;
 }
 
+.form-date-picker > div > select {
+  -webkit-appearance: none;
+  padding: 5px 5px;
+  margin: 5px 10px;
+  border-radius: 0;
+  border: none;
+  border-bottom: 0.5px solid #153F68;
+  background: #FFF;
+  outline: none;
+  font-family: 'Roboto', sans-serif;
+}
+
 /* Calendar */
 
+.calendar-wrapper {
+  margin-top: 20px;
+}
 
+.fc-month-button.btn.btn-primary,
+.fc-agendaWeek-button.btn.btn-primary,
+.fc-today-button, .fc-today-button:hover,  .fc-today-button:disabled,
+.fc-prev-button, .fc-prev-button:hover,
+.fc-next-button, .fc-next-button:hover, .fc-next-button:link {
+  border: none;
+  border-radius: 0;
+  color: #FFF;
+  background-color: #153F68;
+  outline: none;
+}
+
+.fc-month-button.btn.btn-primary.active,
+.fc-agendaWeek-button.btn.btn-primary.active
+{
+  color: #FFF;
+  background-color: #5B99CD;
+}
+
+.fc-time-grid-event .fc-time {
+  background-color: #153F68;
+  margin-bottom: 5px;
+}
+
+.fc-time-grid-event div.fc-title {
+  padding: 0 5px;
+}
+
+.fc-today {
+  background-color: #eaf2ff;
+}
+
+.fc-time {
+  font-family: 'Roboto', sans-serif;
+  font-weight: bold;
+  font-size: 12px;
+}
 
 /* Navbar */
 
@@ -506,4 +566,92 @@ h1, h2, h3, h4, h5 {
 
 .product-details-modal .single-product-details {
 
+}
+
+/* Expense Reports Page */
+
+.expense-reports-wrapper {
+  margin-top: 30px;
+  max-width: auto;
+}
+
+.er-item-wrapper {
+  min-height: 70px;
+  width: 100%;
+  margin: 10px 0;
+  box-shadow: 1px 1px 15px -3px rgba(0,0,0,0.75);
+  -webkit-flex-direction: row;
+  display: -webkit-inline-flex;
+  flex-direction: row;
+  display: inline-flex;
+  justify-content: center;
+}
+
+.er-item-statut-awaiting {
+  border-left: 5px solid #FF4145;
+}
+
+.er-item-statut-inprogress {
+  border-left: 5px solid #FE8631;
+}
+
+.er-item-statut-complete {
+  border-left: 5px solid #45CC59;
+}
+
+.er-item-content {
+  height: 100%;
+  width: 100%;
+  align-self: center;
+  -webkit-flex-direction: row;
+  display: -webkit-inline-flex;
+  flex-direction: row;
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-content: center;
+  justify-content: flex-start;
+}
+
+.er-item-row {
+  height: 100%;
+  padding: 0 20px;
+  align-self: center;
+  text-align: center;
+}
+
+.er-item-owner-picture {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.er-item-row > p {
+  margin:0;
+  font-family: 'Roboto', sans-serif;
+}
+
+.er-item-row-title {
+  font-weight:600;
+  font-size: 10px;
+  padding-bottom: 5px;
+  color:#153F68;
+}
+
+.er-item-row-data {
+  font-weight:300;
+  font-size: 12px;
+}
+
+/* MANUFACTURERS */
+
+.manufacturers {
+  margin-top: 50px;
+  width: 1024px;
+}
+
+.manufacturer-item {
+  padding: 10px;
+  width: 100%;
 }

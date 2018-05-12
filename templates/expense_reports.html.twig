@@ -1,0 +1,156 @@
+{% set page_title = 'Gestion des notes de frais' %}
+
+{% extends 'base/base.html.twig' %}
+
+{% block content %}
+
+  <h3>Gestion des notes de frais</h3>
+
+  <button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#expenseRerportAddModal">Ajouter une note de frais</button>
+  <button type="button" class="btn darkblue-btn square-btn">Historique</button>
+
+  <div class="container-fluid expense-reports-wrapper">
+
+
+    {% if reports is not null %}
+    {% for er in reports %}
+
+    <a data-toggle="modal" data-target="#expenseRerportDetailModal-{{ er.id }}">
+      <div class="er-item-wrapper
+      {% if er.statut == 0 %} er-item-statut-awaiting {% endif %}
+      {% if er.statut == 1 %} er-item-statut-inprogress {% endif %}
+      {% if er.statut == 2 %} er-item-statut-complete {% endif %}
+      ">
+        <div class="er-item-content">
+
+          <div class="er-item-row">
+            <div class="er-item-owner-picture" style="background-image: url({{ asset('media/img/default-user-picture.jpg') }});"></div>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Cree par :</p>
+            <p class="er-item-row-data">{{ er.owner.firstname }} {{ er.owner.lastname }}</p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Reference :</p>
+            <p class="er-item-row-data">NF-{{ er.id }}</p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Date de publication :</p>
+            <p class="er-item-row-data">{{ er.date|date('d/m/Y') }}</p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Statut : </p>
+            <p class="er-item-row-data">
+              {% if er.statut == 0 %} En attente de traitement... {% endif %}
+              {% if er.statut == 1 %} Traitement en cours... {% endif %}
+              {% if er.statut == 2 %} Validee {% endif %}
+            <p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Total :</p>
+            <p class="er-item-row-data">{{ er.totalPrice }} €<p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Part de prise en charge :</p>
+            <p class="er-item-row-data">
+              {% if er.refundedPortion is not null %}
+                {{ er.refundedPortion }} %
+              {% else %}
+                -
+              {% endif %}
+            <p>
+          </div>
+          <div class="er-item-row">
+            <p class="er-item-row-title">Derniere mise a jour : </p>
+            <p class="er-item-row-data">
+              {% if er.lastStatutUpdate is not null %}
+                le {{ er.lastStatutUpdate }} par {{ er.statutUpdateBy }}
+              {% else %}
+                -
+              {% endif %}
+            <p>
+          </div>
+
+        </div>
+
+      </div>
+    </a>
+
+    <!-- Expense Report Edit Modal -->
+    <div class="modal fade" id="expenseRerportDetailModal-{{ er.id }}" tabindex="-1" role="dialog" aria-labelledby="expenseRerportDetailModal-{{ er.id }}" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="expenseRerportDetailModalLabel">Details</h5>
+            <i class="far fa-times-circle" data-dismiss="modal" aria-label="Close" style="font-size:26px;"></i>
+          </div>
+          <div class="modal-body">
+
+            <p>Date : {{ er.date|date('d/m/Y') }}</p>
+            <p>Cree par : {{ er.owner.firstname }} {{ er.owner.lastname }}<p>
+
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn red-btn square-btn" data-dismiss="modal" data-toggle="modal" data-target="#expenseRerportDeleteModal-{{ er.id }}">Supprimer</button>
+            <button type="submit" class="btn blue-btn square-btn" form="createProductForm">Modifier</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Expense Report Edit Modal -->
+    <div class="modal fade modal-danger" id="expenseRerportDeleteModal-{{ er.id }}" tabindex="-1" role="dialog" aria-labelledby="expenseRerportDeleteModal-{{ er.id }}" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="expenseRerportDeleteModal-{{ er.id }}">Supprimer une note de frais</h5>
+          </div>
+          <div class="modal-body">
+            <p>
+              Vous etes sur le point de supprimer une note de frais. Cette action est irreversible et les donnees liees a cet note de frais seront supprrimees de la base de donnees.
+            </p>
+            <p>
+              Voulez-vous vraiment supprimer cette note de frais ?
+            </p>
+          </div>
+          <div class="modal-footer">
+            <a class="btn red-btn square-btn" href="{{ url('delete_expense_report', { 'id': er.id }) }}"><i class="fas fa-trash-alt fa-margin-right"></i>Supprimer</a>
+            <button type="button" class="btn blue-btn square-btn" data-dismiss="modal" data-toggle="modal" data-target="#expenseRerportDetailModal-{{ er.id }}"><i class="fas fa-ban fa-margin-right"></i>Anmuler</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    {% endfor %}
+    {% endif %}
+
+  </div>
+
+  <!-- Expense Report Add Modal -->
+  <div class="modal fade" id="expenseRerportAddModal" tabindex="-1" role="dialog" aria-labelledby="productAddModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="expenseRerportAddModalLabel">Ajouter une note de frais</h5>
+          <i class="far fa-times-circle" data-dismiss="modal" aria-label="Close" style="font-size:26px;"></i>
+        </div>
+        <div class="modal-body">
+
+          {{ form_start(form, {'attr': {'id': 'createExpenseReportForm', 'class': 'create-expense-report-form'}}) }}
+            {{ form_row(form.totalPrice) }}
+            {{ form_row(form.attachement) }}
+          {{ form_end(form) }}
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Annuler</button>
+          <button type="submit" class="btn blue-btn square-btn" form="createExpenseReportForm">Ajouter la note de frais</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+{% endblock %}

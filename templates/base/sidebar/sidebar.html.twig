@@ -5,7 +5,11 @@
   <div class="sidebar-user-profile">
     <div class="sidebar-user-picture" style="background-image: url({{ asset('media/img/default-user-picture.jpg') }});"></div>
     <p class="sidebar-user-name">{{ app.user.firstname }} {{ app.user.lastname }}</p>
-    <p class="sidebar-user-role">{{ app.user.roles[1] }}</p>
+    <p class="sidebar-user-role">
+      {% if "ROLE_ADMIN" in app.user.roles %} Administrateur {% endif %}
+      {% if "ROLE_MANAGER" in app.user.roles %} Manager {% endif %}
+      {% if "ROLE_DOCTOR" in app.user.roles %} Docteur {% endif %}
+    </p>
     <div class="sidebar-user-account text-center">
       <a class="btn blue-btn square-btn" href="{{ url('user_account') }}"><i class="fas fa-user" style="margin-right:10px;"></i>Mon compte</a>
       <a class="btn red-btn square-btn" href="{{ url('logout') }}"><i class="fas fa-power-off"></i></a>
@@ -19,13 +23,16 @@
     </li>
     {% endif %}
     <li class="sidebar-menu-item">
+      <a href="{{ url('manufacturers') }}"><i class="fas fa-angle-right"></i>Laboratoires</a>
+    </li>
+    <li class="sidebar-menu-item">
       <a href="{{ url('products_list') }}"><i class="fas fa-angle-right"></i>Liste des médicaments</a>
     </li>
     <li class="sidebar-menu-item">
       <a href="{{ url('calendar') }}"><i class="fas fa-angle-right"></i>Calendrier</a>
     </li>
     <li class="sidebar-menu-item">
-      <a href="{{ url('calendar') }}"><i class="fas fa-angle-right"></i>Notes de frais</a>
+      <a href="{{ url('expense_reports') }}"><i class="fas fa-angle-right"></i>Notes de frais</a>
     </li>
   </ul>
 

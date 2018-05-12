@@ -4,11 +4,72 @@
 
 {% block content %}
 
-<div class="container calendar-wrapper">
-<div id='calendar' class="calendar">
+<button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#eventAddModal">
+  Ajouter un événement
+</button>
 
+<div class="container calendar-wrapper">
+  <div id='calendar' class="calendar">
+
+  </div>
 </div>
+
+<!-- Create Calendar Event Modal -->
+<div class="modal fade modal-form" id="eventAddModal" tabindex="-1" role="dialog" aria-labelledby="eventAddModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventAddModalLabel">Ajouter un événement</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        {{ form_start(form, {'attr': {'id': 'createEventForm', 'class': 'create-event-form'}}) }}
+          {{ form_row(form.name) }}
+          <p>Date de debut :</p>
+          {{ form_row(form.start, {'attr': {'class': 'form-date-picker'}}) }}
+          <p>Date de fin :</p>
+          {{ form_row(form.end, {'attr': {'class': 'form-date-picker'}}) }}
+        {{ form_end(form) }}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn blue-btn square-btn" form="createEventForm">Créer l'évenement</button>
+      </div>
+    </div>
+  </div>
 </div>
+
+<!-- Calendar Event Details Modal -->
+<div class="modal fade modal-form" id="eventDetailsModal" tabindex="-1" role="dialog" aria-labelledby="eventDetailsModal" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="eventDetailsModal">Details de l'événement</h5>
+      </div>
+      <div class="modal-body">
+
+        <p>Nom de l'événement : <span id="eventName"></span></p>
+        <p>Cree par : <span id="eventCreatedBy"></span></p>
+        <p>Date de debut : <span id="eventStartDate"></span></p>
+        <p>Heure de debut : <span id="eventStartTime"></span></p>
+        <p>Date de fin : <span id="eventEndDate"></span></p>
+        <p>Heure de fin : <span id="eventEndTime"></span></p>
+        <p id="eventRelativeTime"></p>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn darkblue-btn square-btn" data-dismiss="modal">Fermer</button>
+        <a id="deleteEventButton" href="" class="btn red-btn square-btn">Supprimer l'évenement</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+
 
 {% endblock %}
 
@@ -20,9 +81,18 @@
 <script>
 $(document).ready(function() {
 
-  $('#calendar').fullCalendar({
+$('#calendar').fullCalendar({
     locale: 'fr',
     isRTL: false,
+    themeSystem: 'bootstrap4',
+    bootstrapFontAwesome: {
+      close: 'fa-times',
+      prev: 'fa-chevron-left',
+      next: 'fa-chevron-right',
+      prevYear: 'fa-angle-double-left',
+      nextYear: 'fa-angle-double-right'
+    },
+    editable: true,
     firstDay: 1,
     weekends: false,
     timezone: "local",
@@ -34,20 +104,12 @@ $(document).ready(function() {
     minTime: "08:00:00",
     maxTime: "20:00:00",
     defaultView: 'agendaWeek',
-    themeSystem: 'bootstrap4',
     header: {
       left:   'month,agendaWeek',
       center: 'title',
       right:  'today prev,next'
     },
     columnHeaderFormat: 'dddd D',
-    bootstrapFontAwesome: {
-      close: 'fa-times',
-      prev: 'fa-chevron-left',
-      next: 'fa-chevron-right',
-      prevYear: 'fa-angle-double-left',
-      nextYear: 'fa-angle-double-right'
-    },
     nowIndicator: true,
     events: '{{ url('calendar_events') }}',
     eventColor: '#153F68',
@@ -55,9 +117,57 @@ $(document).ready(function() {
     views: {
       agenda: {
         titleFormat: 'MMMM YYYY'
+      },
+      list: {
+        titleFormat: 'MMMM YYYY'
       }
+    },
+    eventClick: function(event, jsEvent, view) {
+      console.log(event);
+
+      $('#eventName').html(event.title);
+      $('#eventCreatedBy').html(event.createdBy);
+      $('#eventStartDate').html(moment(event.start).format('dddd Do MMMM YYYY'));
+      $('#eventStartTime').html(moment(event.start).format('LT'));
+      $('#eventEndDate').html(moment(event.end).format('dddd Do MMMM YYYY'));
+      $('#eventEndTime').html(moment(event.end).format('LT'));
+
+      var relativeTime = moment(event.start).fromNow();
+      if (moment(event.start).isBefore(moment())) {
+        $('#eventRelativeTime').html("Cet evenement a eu lieu : " + relativeTime);
+      } else {
+        $('#eventRelativeTime').html("Cet evenement aura lieu : " + relativeTime);
+      }
+      $('#deleteEventButton').attr("href", '{{ app.request.getSchemeAndHttpHost() }}' + '/calendar/events/delete/' + event.id);
+      $('#eventDetailsModal').modal();
+
+      $(this).css('border-color', 'red');
+
+  }
+});
+
+function redimensionnement() {
+  var result = document.getElementById('result');
+  if("matchMedia" in window) {
+    if(window.matchMedia("(min-width:768px)").matches) {
+      $('#calendar').fullCalendar('changeView', 'agendaWeek');
+      $('#calendar').fullCalendar({
+        header: { left: '', center: 'title' }
+      });
+    } else {
+      $('#calendar').fullCalendar('changeView', 'listWeek');
     }
-  });
+  }
+}
+// On lie l'événement resize à la fonction
+window.addEventListener('resize', redimensionnement, false);
+
+
+
+
+
+
+
 
 });
 </script>
