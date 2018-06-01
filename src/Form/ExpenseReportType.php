@@ -19,7 +19,8 @@ class ExpenseReportType extends AbstractType
     {
       $builder
       ->add('totalPrice', MoneyType::class, array(
-          'currency' => 'EUR',
+          'currency' => '',
+          'scale' => 2,
           'label' => false,
           'attr' => array(
             'placeholder' => 'Prix'

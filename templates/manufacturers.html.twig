@@ -1,84 +1,192 @@
-{% set page_title = 'Liste des médicaments' %}
-{% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ "/media/img/products-thumbnails/" %}
+{% set page_title = 'Liste des médicaments' %} {% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ "/media/img/products-thumbnails/" %} {% extends 'base/base.html.twig' %} {% block content %}
 
-{% extends 'base/base.html.twig' %}
+<h2>Laboratoires</h2>
 
-{% block content %}
+<h3>{{ submittedForms }} submitted forms.</h3>
 
-  <h2>Laboratoires</h2>
+<button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#manufacturerAddModal">
+  Ajouter un laboratoire
+</button>
 
-  <button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#manufacturerAddModal">
-    Ajouter un laboratoire
-  </button>
+<div class="manufacturers container-fluid">
 
-  <div class="manufacturers container">
+  {% for manufacturer in manufacturers %}
 
-    {% for manufacturer in manufacturers %}
-
-    <div class="manufacturer-item" data-toggle="modal" data-target="#manufacturerEditModal-{{ manufacturer.id }}">
-      <h4>{{ manufacturer.name }}</h4>
-      <p>Adresse : {{ manufacturer.address }}</p>
-      <p>Code postal : {{ manufacturer.zip }}</p>
-      <p>Pays : {{ manufacturer.country }}</p>
-    </div>
-
-    <!-- Manufacturer Edit Modal -->
-    <div class="modal fade modal-form" id="manufacturerEditModal-{{ manufacturer.id }}" tabindex="-1" role="dialog" aria-labelledby="manufacturerAddModalLabel" aria-hidden="true">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title" id="manufacturerEditModal-{{ manufacturer.id }}">Laboratoire {{ manufacturer.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
-          </div>
-          <div class="modal-body">
-
-            <p>Adresse : {{ manufacturer.address }}</p>
-            <p>Code postal : {{ manufacturer.zip }}</p>
-            <p>Pays : {{ manufacturer.country }}</p>
-
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
-            <button type="submit" class="btn blue-btn square-btn" form="">Modifier</button>
-          </div>
-        </div>
+  <div class="manufacturer-item">
+    <div class="manufacturer-content">
+      <h4 class="manufacturer-name">{{ manufacturer.name }}</h4>
+      <div class="manufacturer-addr">
+        <p>{{ manufacturer.address }}</p>
+        <p>{{ manufacturer.zip }}, {{ manufacturer.city }}</p>
+        <p>{{ manufacturer.country }}</p>
       </div>
     </div>
-
-    {% endfor %}
-
+    <div class="manufacturer-button">
+      <p>+ d'infos</p>
+      <div data-toggle="modal" data-target="#manufacturerEditModal-{{ manufacturer.id }}"><i class="far fa-arrow-alt-circle-right"></i></div>
+    </div>
   </div>
 
-
-  <!-- Manufacturer Add Modal -->
-  <div class="modal fade modal-form" id="manufacturerAddModal" tabindex="-1" role="dialog" aria-labelledby="manufacturerAddModalLabel" aria-hidden="true">
+  <!-- Manufacturer Edit Modal -->
+  <div class="modal fade modal-form" id="manufacturerEditModal-{{ manufacturer.id }}" tabindex="-1" role="dialog" aria-labelledby="manufacturerAddModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="manufacturerAddModalLabel">Ajouter un produit</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <h5 class="modal-title" id="manufacturerEditModal-{{ manufacturer.id }}">Laboratoire {{ manufacturer.name }}</h5>
         </div>
         <div class="modal-body">
+          <div class="manufacturer-modal-content">
 
-          {{ form_start(form, {'attr': {'id': 'createManufacturerForm', 'class': 'create-manufacturer-form'}}) }}
-            {{ form_row(form.name) }}
-            {{ form_row(form.address) }}
-            {{ form_row(form.zip) }}
-            {{ form_row(form.country) }}
-          {{ form_end(form) }}
+            <div class="modal-section">
+              <h4>Coordonnées : </h4>
+              <div class="manufacturer-addr">
+                <p><b style="font-size: 12px;">Adresse : </b></p>
+                <p>{{ manufacturer.address }}</p>
+                <p>{{ manufacturer.zip }}, {{ manufacturer.city }}</p>
+                <p>{{ manufacturer.country }}</p>
+                </br>
+                <p><b style="font-size: 12px;">Telephone :</b> {{ manufacturer.phone }}</p>
+                <p><b style="font-size: 12px;">Email :</b> {{ manufacturer.email }}</p>
+              </div>
+            </div>
 
+            <div class="modal-section manufacturer-members">
+              <h4>Produits :</h4>
+              <table class="table table-striped">
+                <tr class="text-center">
+                  <th>Nom</th>
+                  <th>Dose</th>
+                  <th>Quantité en stock</th>
+                </tr>
+                {% if manufacturer.products is not null %} {% for product in manufacturer.products %}
+                <tr>
+                  <td>{{ product.name }}</td>
+                  <td>{{ product.dose }}</td>
+                  <td>{{ product.quantity }} </td>
+                </tr>
+                {% endfor %} {% endif %}
+              </table>
+              <button type="button" class="btn darkblue-btn square-btn" data-dismiss="modal" data-toggle="modal" data-target="#AddProductModal-{{ manufacturer.id }}">
+              <i class="fas fa-plus"></i> Ajouter un produit
+            </button>
+            </div>
+
+            <div class="modal-section manufacturer-products">
+              <h4>Membres :</h4>
+              <table class="table table-striped">
+                <tr class="text-center">
+                  <th>Nom complet</th>
+                  <th>Email</th>
+                  <th>Role</th>
+                </tr>
+
+                {% if manufacturer.members is not null %} {% for member in manufacturer.members %}
+                <tr>
+                  <td>{{ member.firstname }} {{ member.lastname }} </td>
+                  <td>{{ member.email }}</td>
+                  <td>{{ member.role }} </td>
+                </tr>
+                {% endfor %} {% endif %}
+
+              </table>
+              <button type="button" class="btn darkblue-btn square-btn" data-dismiss="modal" data-toggle="modal" data-target="#AddMemberModal-{{ manufacturer.id }}">
+              <i class="fas fa-plus"></i> Ajouter un membre
+            </button>
+            </div>
+
+          </div>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
-          <button type="submit" class="btn blue-btn square-btn" form="createManufacturerForm">Ajouter</button>
+          <button type="submit" class="btn blue-btn square-btn" form="">Modifier</button>
         </div>
       </div>
     </div>
   </div>
+
+  {% endfor %}
+
+</div>
+
+<!-- MODAL DIALOGS -->
+
+{% for productform in productforms %}
+
+<!-- Manufacturer Add Product Modal -->
+<div class="modal fade modal-form" id="AddProductModal-{{ productform.manufacturerId }}" tabindex="-1" role="dialog" aria-labelledby="AddProductModal-{{ productform.manufacturerId }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddProductModal-{{ productform.manufacturerId }}">Ajouter un produit</h5>
+      </div>
+      <div class="modal-body">
+
+        {{ form_start(productform.formView, {'attr': {'id': 'ManufacturerAddProductForm-' ~ productform.manufacturerId, 'class': 'manufacturer-add-product-form'}}) }} 
+        {{ form_end(productform.formView) }}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn blue-btn square-btn" form="ManufacturerAddProductForm-{{ productform.manufacturerId }}">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %} {% for memberform in memberforms %}
+
+<!-- Manufacturer Add Member Modal -->
+<div class="modal fade modal-form" id="AddMemberModal-{{ memberform.manufacturerId }}" tabindex="-1" role="dialog" aria-labelledby="AddMemberModal-{{ memberform.manufacturerId }}" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="AddMemberModal-{{ memberform.manufacturerId }}">Ajouter un produit</h5>
+      </div>
+      <div class="modal-body">
+
+        {{ form_start(memberform.formView, {'attr': {'id': 'ManufacturerAddMemberForm-' ~ memberform.manufacturerId, 'class': 'manufacturer-add-member-form'}}) }} {{ form_end(memberform.formView) }}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn blue-btn square-btn" form="ManufacturerAddMemberForm-{{ memberform.manufacturerId }}">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endfor %}
+
+
+<!-- Manufacturer Add Modal -->
+<div class="modal fade modal-form" id="manufacturerAddModal" tabindex="-1" role="dialog" aria-labelledby="manufacturerAddModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="manufacturerAddModalLabel">Ajouter un laboratoire</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+        {{ form_start(form, {'attr': {'id': 'createManufacturerForm', 'class': 'create-manufacturer-form'}}) }} 
+          {{ form_row(form.name) }}
+          {{ form_row(form.address) }}
+          {{ form_row(form.zip) }}
+          {{ form_row(form.city) }}
+          {{ form_row(form.country) }}
+          {{ form_row(form.phone)
+        }} {{ form_row(form.email) }} {{ form_end(form) }}
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn red-btn square-btn" data-dismiss="modal">Fermer</button>
+        <button type="submit" class="btn blue-btn square-btn" form="createManufacturerForm">Ajouter</button>
+      </div>
+    </div>
+  </div>
+</div>
 </div>
 
 {% endblock %}

@@ -6,6 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use App\Entity\Product;
+use App\Entity\User;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\ManufacturerRepository")
@@ -25,7 +26,7 @@ class Manufacturer
     private $name;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=false)
+     * @ORM\Column(type="string", length=2048, nullable=false)
      */
     private $address;
 
@@ -37,12 +38,33 @@ class Manufacturer
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
+    private $city;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=false)
+     */
     private $country;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $phone;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $email;
 
     /**
     * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="manufacturer")
     */
     private $products;
+
+    /**
+    * @ORM\OneToMany(targetEntity="App\Entity\User", mappedBy="memberOf")
+    */
+    private $members;
+
 
     // GETTERS
 
@@ -66,9 +88,24 @@ class Manufacturer
         return $this->zip;
     }
 
+    public function getCity()
+    {
+        return $this->city;
+    }
+
     public function getCountry()
     {
         return $this->country;
+    }
+
+    public function getPhone()
+    {
+        return $this->phone;
+    }
+
+    public function getEmail()
+    {
+        return $this->email;
     }
 
     /**
@@ -77,6 +114,14 @@ class Manufacturer
     public function getProducts()
     {
         return $this->products;
+    }
+
+    /**
+     * @return Collection|User[]
+     */
+    public function getMembers()
+    {
+        return $this->members;
     }
 
     // SETTERS
@@ -96,9 +141,24 @@ class Manufacturer
         $this->zip = $zip;
     }
 
+    public function setCity($city)
+    {
+        $this->city = $city;
+    }
+
     public function setCountry($country)
     {
         $this->country = $country;
+    }
+
+    public function setPhone($phone)
+    {
+        $this->phone = $phone;
+    }
+
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
     // FUNCTIONS
@@ -106,5 +166,6 @@ class Manufacturer
     public function __construct()
     {
         $this->products = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 }

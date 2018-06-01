@@ -8,9 +8,9 @@ use Doctrine\Common\Collections\Collection;
 use App\Entity\Product;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\ProductTypeRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\ProductCategoryRepository")
  */
-class ProductType
+class ProductCategory
 {
     /**
      * @ORM\Id
@@ -22,10 +22,10 @@ class ProductType
     /**
      * @ORM\Column(type="string", length=255, nullable=false)
      */
-    private $type;
+    private $category;
 
     /**
-    * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="type")
+    * @ORM\OneToMany(targetEntity="App\Entity\Product", mappedBy="category")
     */
     private $products;
 
@@ -36,9 +36,9 @@ class ProductType
         return $this->id;
     }
 
-    public function getType()
+    public function getCategory()
     {
-        return $this->type;
+        return $this->category;
     }
 
     /**
@@ -51,9 +51,9 @@ class ProductType
 
     // SETTERS
 
-    public function setType($type)
+    public function setCategory($category)
     {
-        $this->type = $type;
+        $this->category = $category;
     }
 
     // FUNCTIONS

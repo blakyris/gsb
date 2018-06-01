@@ -31,6 +31,8 @@ class ExpenseReportController extends Controller
       if ($form->isSubmitted() && $form->isValid()) {
           $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
 
+          dump($report);
+
           $report->setOwner($currentUser);
           $report->setStatut(0);
 
@@ -42,16 +44,16 @@ class ExpenseReportController extends Controller
           $file->move($directory, $filename);
           $report->setAttachement($filename);
 
-          // save the User
+          // save the Report
           $em = $this->getDoctrine()->getManager();
-          $em->persist($report);-
+          $em->persist($report);
           $em->flush();
 
           return $this->redirectToRoute('expense_reports');
       }
 
       foreach ($reports as $report) {
-        
+
       }
 
       return $this->render('expense_reports.html.twig',  array(

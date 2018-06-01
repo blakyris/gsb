@@ -3,7 +3,8 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use App\Entity\ProductType;
+
+use App\Entity\ProductCategory;
 use App\Entity\Manufacturer;
 
 /**
@@ -29,10 +30,10 @@ class Product
     private $description;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\ProductType", inversedBy="products")
-     * @ORM\JoinColumn(name="type_id", referencedColumnName="id", nullable=true)
+     * @ORM\ManyToOne(targetEntity="App\Entity\ProductCategory", inversedBy="products")
+     * @ORM\JoinColumn(name="category", referencedColumnName="id", nullable=true)
      */
-    private $type;
+    private $category;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="products")
@@ -77,12 +78,12 @@ class Product
         return $this->description;
     }
 
-    public function getType(): ProductType
+    public function getCategory(): ?ProductCategory
     {
-        return $this->type;
+        return $this->category;
     }
 
-    public function getManufacturer(): Manufacturer
+    public function getManufacturer(): ?Manufacturer
     {
         return $this->manufacturer;
     }
@@ -119,11 +120,6 @@ class Product
         $this->description = $description;
     }
 
-    public function setManufacturer($manufacturer)
-    {
-        $this->manufacturer = $manufacturer;
-    }
-
     public function setPrice($price)
     {
         $this->price = $price;
@@ -134,9 +130,14 @@ class Product
         $this->quantity = $quantity;
     }
 
-    public function setType(ProductType $type)
+    public function setCategory(ProductCategory $category)
     {
-        $this->type = $type;
+        $this->category = $category;
+    }
+
+    public function setManufacturer(Manufacturer $manufacturer)
+    {
+        $this->manufacturer = $manufacturer;
     }
 
     public function setThumbnail($thumbnail)

@@ -2,15 +2,15 @@
 
 namespace App\Repository;
 
-use App\Entity\ProductType;
+use App\Entity\ProductCategory;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
-class ProductTypeRepository extends ServiceEntityRepository
+class ProductCategoryRepository extends ServiceEntityRepository
 {
     public function __construct(RegistryInterface $registry)
     {
-        parent::__construct($registry, ProductType::class);
+        parent::__construct($registry, ProductCategory::class);
     }
 
     /*

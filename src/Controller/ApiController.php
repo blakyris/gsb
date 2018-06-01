@@ -5,14 +5,141 @@ namespace App\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\JsonResponse;
+
+use App\Entity\CalendarEvents;
+use App\Entity\User;
+use App\Entity\Product;
+use App\Entity\ProductCategory;
+use App\Entity\Manufacturer;
+use App\Entity\Doctor;
 
 class ApiController extends Controller
 {
+    private function constructProductData(Product $item)
+    {
+      $data = array(
+        'name' => $item->getName(),
+        'manufacturer' => $item->getManufacturer()->getName(),
+        'price' => $item->getPrice(),
+        'dose' => $item->getDose(),
+        'thumbnail' => $item->getThumbnail()
+      );
+
+      return ($data);
+    }
+
+
     /**
      * @Route("/api", name="api")
      */
     public function index()
     {
-      
+
+    }
+
+   /**
+    * @Route("/api/get/products", name="api_get_products")
+    */
+    public function apiGetProducts()
+    {
+      $response = new JsonResponse();
+
+      $repository = $this->getDoctrine()->getRepository(Product::class);
+      $items = $repository->findAll();
+
+      $i = 0;
+      $data = array();
+      foreach ($items as $item) {
+        $data[$i++] = $this->constructProductData($item);
+      }
+
+      $response->setData($data);
+
+      return ($response);
+    }
+
+       /**
+    * @Route("/api/get/product/{id}", name="api_get_products")
+    */
+    public function apiGetProductById($id)
+    {
+      $response = new JsonResponse();
+
+      $repository = $this->getDoctrine()->getRepository(Product::class);
+      $item = $repository->find($id);
+
+      $data = array();
+      if ($item != null)
+      {
+          $data = $this->constructProductData($item);
+      }
+
+      $response->setData($data);
+
+      return ($response);
+    }
+
+
+   /**
+    * @Route("/api/get/manufacturers", name="api_get_manufacturers")
+    */
+    public function apiGetManufacturers()
+    {
+      $response = new JsonResponse();
+
+      $repository = $this->getDoctrine()->getRepository(Manufacturer::class);
+      $items = $repository->findAll();
+
+      $i = 0;
+      $data = array();
+      foreach ($items as $item) {
+
+        $data[$i++] = array(
+          'name' => $item->getName(),
+          'addresss' => $item->getAddress(),
+          'zip' => $item->getZip(),
+          'city' => $item->getCity(),
+          'phone' => $item->getPhone()
+        );
+
+      }
+
+      $response->setData($data);
+
+      return ($response);
+    }
+
+    /**
+    * @Route("/api/get/events", name="api_get_events")
+    */
+    public function apiGetCalendarEvents()
+    {
+      $response = new JsonResponse();
+
+      $repository = $this->getDoctrine()->getRepository(CalendarEvents::class);
+      $usersRepo = $this->getDoctrine()->getRepository(User::class);
+      $items = $repository->findAll();
+      $i = 0;
+
+      $data = array();
+      foreach ($items as $item) {
+
+        $user = $usersRepo->find($event->getCreator());
+
+        $data[$i++] = array(
+          'id' => $item->getId(),
+          'title' => $item->getName(),
+          'start' => $item->getStart()->format('Y-m-d H:i:s'),
+          'end' => $item->getEnd()->format('Y-m-d H:i:s'),
+          'allDay' => $item->getAllDay(),
+          'createdBy' => $item->getFullName()
+        );
+
+      }
+
+      $response->setData($data);
+
+      return ($response);
     }
 }

@@ -34,4 +34,8 @@
       top: 0;
   }
 
+  .manufacturer-item {
+    margin: 20px 10px;
+  }
+
 }

@@ -28,7 +28,7 @@ class ExpenseReport
     private $date;
 
     /**
-     * @ORM\Column(type="decimal", precision=7, scale=2, nullable=true, name="totalPrice")
+     * @ORM\Column(type="float", nullable=false, name="totalPrice")
      */
     private $totalPrice;
 
@@ -43,7 +43,6 @@ class ExpenseReport
     private $statut;
 
     /**
-     * 0 = Awaiting, 1 = In Progress, 2 = Complete
      * @ORM\Column(type="float", nullable=true, name="refundedPortion")
      */
     private $refundedPortion;

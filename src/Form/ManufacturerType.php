@@ -30,12 +30,29 @@ class ManufacturerType extends AbstractType
         ->add('zip', TextType::class, array(
           'label' => false,
           'attr' => array(
-            'placeholder' => 'Code Postale'
+            'placeholder' => 'Code Postal'
+        )))
+        ->add('city', TextType::class, array(
+          'label' => false,
+          'attr' => array(
+            'placeholder' => 'Ville'
         )))
         ->add('country', TextType::class, array(
           'label' => false,
           'attr' => array(
             'placeholder' => 'Pays'
+        )))
+        ->add('phone', TextType::class, array(
+          'label' => false,
+          'required' => false,
+          'attr' => array(
+            'placeholder' => 'Telephone'
+        )))
+        ->add('email', TextType::class, array(
+          'label' => false,
+          'required' => false,
+          'attr' => array(
+            'placeholder' => 'Adresse electronique'
         )));
     }
 

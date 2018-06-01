@@ -118,8 +118,10 @@ h1, h2, h3, h4, h5 {
   outline: none;
 }
 
+.form-choice,
 .form-wrapper form > div > div > select {
   appearance: none;
+  -webkit-appearance: none;
   padding: 5px 5px;
   margin-right: 10px;
   border-radius: 0;
@@ -146,6 +148,15 @@ h1, h2, h3, h4, h5 {
 .modal .modal-header {
   background-color: #153F68;
   color: #FFF;
+}
+
+.modal-section { margin-top: 40px; }
+
+.modal-section > h4 {
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #153F68;
 }
 
 /* Danger Modal */
@@ -648,10 +659,81 @@ h1, h2, h3, h4, h5 {
 
 .manufacturers {
   margin-top: 50px;
-  width: 1024px;
+  width: 100%;
+  display: block;
 }
 
 .manufacturer-item {
+  padding: 0px;
+  max-width: 250px;
+  background-color: #FFF;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+  float: left;
+}
+
+.manufacturer-content {
   padding: 10px;
+}
+
+.manufacturer-name {
+  font-weight: bold;
+  font-size: 18px;
+  margin: 10px 0 20px 0;
+}
+
+.manufacturer-addr > p {
+  font-weight: 200;
+  font-size: 12px;
+  line-height: 3px;
+}
+
+.manufacturer-button {
+  height: 45px;
   width: 100%;
+  background-color: #4f83cc;
+  color: #FFF;
+}
+
+.manufacturer-button > p {
+    text-align: right;
+    padding-top: 9px;
+    display: inline-block;
+    margin-left: 120px;
+}
+
+.manufacturer-button > div {
+  height: 30px;
+  width: 30px;
+  margin-left: 10px;
+  margin-right: 10px;
+  background-color: #64b5f6;
+  display: inline-block;
+  overflow: auto;
+  text-align: center;
+  border-radius: 50%;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  vertical-align: middle;
+}
+
+.manufacturer-button > div > i {
+  padding-top: 4px;
+  font-size: 22px;
+}
+
+.manufacturer-members > table,
+.manufacturer-products > table {
+  font-size: 12px;
+}
+
+div.manufacturer-members > button,
+div.manufacturer-products > button {
+  border-radius: 20px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  font-size: 12px;
+}
+
+div.manufacturer-products > button > i,
+div.manufacturer-members > button > i {
+  margin-right: 10px;
 }

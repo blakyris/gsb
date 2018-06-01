@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use App\Entity\Manufacturer;
 use App\Entity\CalendarEvents;
 
 /**
@@ -63,6 +63,12 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="json")
      */
     private $roles = [];
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Manufacturer", inversedBy="members")
+     * @ORM\JoinColumn(name="memberOf", referencedColumnName="id", nullable=true)
+     */
+    private $memberOf;
 
     /**
      * @ORM\Column(name="is_active", type="boolean", nullable=true)
@@ -122,6 +128,11 @@ class User implements UserInterface, \Serializable
         return array_unique(array_merge(['ROLE_USER'], $this->roles));
     }
 
+    public function getMemberOf(): Manufacturer
+    {
+        return $this->memberOf;
+    }
+
     public function getUsername()
     {
       return $this->username;
@@ -179,6 +190,11 @@ class User implements UserInterface, \Serializable
         $this->roles = $roles;
     }
 
+    public function setMemberOf(Manufacturer $manufacturer)
+    {
+        $this->memberOf = $manufacturer;
+    }
+
     public function setUsername($username)
     {
         $this->username = $username;
@@ -188,7 +204,6 @@ class User implements UserInterface, \Serializable
     {
         $this->plainPassword = $password;
     }
-
 
     public function setPassword($password)
     {

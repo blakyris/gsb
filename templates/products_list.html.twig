@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<h2 class="text-center" style="margin-top:20px;">Médicaments</h2>
+<h2 class="text-center" style="margin-top:20px;">Catalogue de médicaments</h2>
 
 <button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#productAddModal">
   Ajouter un produit
@@ -46,9 +46,6 @@
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title" id="productDetailModalLabel">{{ product.name }}</h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
-            </button>
           </div>
           <div class="modal-body">
             <div class="single-product-thumbnail" style="background-image:url('{{ thumbnail_path ~ product.thumbnail }}');"></div>
