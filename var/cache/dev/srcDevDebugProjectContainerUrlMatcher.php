@@ -58,6 +58,11 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
                     return array (  '_controller' => 'App\\Controller\\ApiController::apiGetManufacturers',  '_route' => 'api_get_manufacturers',);
                 }
 
+                // api_get_expensereports
+                if ('/api/get/expensereports' === $pathinfo) {
+                    return array (  '_controller' => 'App\\Controller\\ApiController::apiGetExpenseReports',  '_route' => 'api_get_expensereports',);
+                }
+
                 // api_get_events
                 if ('/api/get/events' === $pathinfo) {
                     return array (  '_controller' => 'App\\Controller\\ApiController::apiGetCalendarEvents',  '_route' => 'api_get_events',);

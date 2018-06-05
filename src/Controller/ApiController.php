@@ -18,6 +18,7 @@ use App\Entity\User;
 use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Entity\Manufacturer;
+use App\Entity\ExpenseReport;
 use App\Entity\Doctor;
 
 
@@ -142,12 +143,40 @@ class ApiController extends Controller
           'phone' => $item->getPhone()
         );
 
-      }
+      } 
 
       $response->setData($data);
 
       return ($response);
     }
+
+   /**
+    * @Route("/api/get/expensereports", name="api_get_expensereports")
+    */
+    public function apiGetExpenseReports()
+    {
+      $response = new JsonResponse();
+
+      $repository = $this->getDoctrine()->getRepository(ExpenseReport::class);
+      $items = $repository->findAll();
+
+      $i = 0;
+      $data = array();
+      foreach ($items as $item) {
+
+        $data[$i++] = array(
+          'reference' => "NF-" + $item->getId(),
+          'amount' => $item->getPrice()
+        );
+
+      } 
+
+      $response->setData($data);
+
+      return ($response);
+    }
+
+
 
     /**
     * @Route("/api/get/events", name="api_get_events")
