@@ -1,8 +1,9 @@
-{% set page_title = 'Liste des médicaments' %} {% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ "/media/img/products-thumbnails/" %} {% extends 'base/base.html.twig' %} {% block content %}
+{% set page_title = 'Liste des médicaments' %} {% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ "/media/img/products-thumbnails/" %} 
+{% extends 'base/base.html.twig' %} 
+
+{% block content %}
 
 <h2>Laboratoires</h2>
-
-<h3>{{ submittedForms }} submitted forms.</h3>
 
 <button type="button" class="btn darkblue-btn square-btn" data-toggle="modal" data-target="#manufacturerAddModal">
   Ajouter un laboratoire
@@ -133,7 +134,9 @@
   </div>
 </div>
 
-{% endfor %} {% for memberform in memberforms %}
+{% endfor %} 
+
+{% for memberform in memberforms %}
 
 <!-- Manufacturer Add Member Modal -->
 <div class="modal fade modal-form" id="AddMemberModal-{{ memberform.manufacturerId }}" tabindex="-1" role="dialog" aria-labelledby="AddMemberModal-{{ memberform.manufacturerId }}" aria-hidden="true">
@@ -144,7 +147,8 @@
       </div>
       <div class="modal-body">
 
-        {{ form_start(memberform.formView, {'attr': {'id': 'ManufacturerAddMemberForm-' ~ memberform.manufacturerId, 'class': 'manufacturer-add-member-form'}}) }} {{ form_end(memberform.formView) }}
+        {{ form_start(memberform.formView, {'attr': {'id': 'ManufacturerAddMemberForm-' ~ memberform.manufacturerId, 'class': 'manufacturer-add-member-form'}}) }}
+        {{ form_end(memberform.formView) }}
 
       </div>
       <div class="modal-footer">
@@ -188,5 +192,17 @@
   </div>
 </div>
 </div>
+
+{% endblock %}
+
+{% block footer %}
+
+  {{ parent() }}
+
+  {% for form in productforms %}
+    <script type="text/javascript">
+      $('.collectionSelector-{{ form.manufacturerId }}').collection();
+    </script>
+  {% endfor %}
 
 {% endblock %}

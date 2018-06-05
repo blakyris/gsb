@@ -28,16 +28,29 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
             $canonicalMethod = 'GET';
         }
 
-        if (0 === strpos($pathinfo, '/a')) {
-            // api
-            if ('/api' === $pathinfo) {
-                return array (  '_controller' => 'App\\Controller\\ApiController::index',  '_route' => 'api',);
+        if (0 === strpos($pathinfo, '/api')) {
+            // api_login
+            if ('/api/login' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\ApiController::jsonLogin',  '_route' => 'api_login',);
+            }
+
+            // api_user
+            if ('/api/user' === $pathinfo) {
+                return array (  '_controller' => 'App\\Controller\\ApiController::jsonUser',  '_route' => 'api_user',);
             }
 
             if (0 === strpos($pathinfo, '/api/get')) {
-                // api_get_products
-                if (0 === strpos($pathinfo, '/api/get/product') && preg_match('#^/api/get/product/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
-                    return $this->mergeDefaults(array_replace($matches, array('_route' => 'api_get_products')), array (  '_controller' => 'App\\Controller\\ApiController::apiGetProductById',));
+                if (0 === strpos($pathinfo, '/api/get/product')) {
+                    // api_get_products
+                    if ('/api/get/products' === $pathinfo) {
+                        return array (  '_controller' => 'App\\Controller\\ApiController::apiGetProducts',  '_route' => 'api_get_products',);
+                    }
+
+                    // api_get_one_product
+                    if (preg_match('#^/api/get/product/(?P<id>[^/]++)$#sD', $pathinfo, $matches)) {
+                        return $this->mergeDefaults(array_replace($matches, array('_route' => 'api_get_one_product')), array (  '_controller' => 'App\\Controller\\ApiController::apiGetProductById',));
+                    }
+
                 }
 
                 // api_get_manufacturers
@@ -52,14 +65,14 @@ class srcDevDebugProjectContainerUrlMatcher extends Symfony\Bundle\FrameworkBund
 
             }
 
-            // user_account
-            if ('/account' === $pathinfo) {
-                return array (  '_controller' => 'App\\Controller\\UserAccountController::index',  '_route' => 'user_account',);
-            }
-
         }
 
-        elseif (0 === strpos($pathinfo, '/c')) {
+        // user_account
+        if ('/account' === $pathinfo) {
+            return array (  '_controller' => 'App\\Controller\\UserAccountController::index',  '_route' => 'user_account',);
+        }
+
+        if (0 === strpos($pathinfo, '/c')) {
             // calendar
             if ('/calendar' === $pathinfo) {
                 return array (  '_controller' => 'App\\Controller\\CalendarController::index',  '_route' => 'calendar',);

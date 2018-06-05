@@ -1052,6 +1052,41 @@
         ]
     },
     {
+        "name": "ninsuo/symfony-collection",
+        "version": "2.1.27",
+        "version_normalized": "2.1.27.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/ninsuo/symfony-collection.git",
+            "reference": "b9b646cf8661458ef0a3aaf728dfc39ea0e44e9d"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/ninsuo/symfony-collection/zipball/b9b646cf8661458ef0a3aaf728dfc39ea0e44e9d",
+            "reference": "b9b646cf8661458ef0a3aaf728dfc39ea0e44e9d",
+            "shasum": ""
+        },
+        "time": "2018-05-22T15:53:28+00:00",
+        "type": "library",
+        "installation-source": "dist",
+        "autoload": {
+            "classmap": [
+                "ScriptHandler.php"
+            ]
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "MIT"
+        ],
+        "authors": [
+            {
+                "name": "Alain Tiemblo",
+                "email": "ninsuo@gmail.com"
+            }
+        ],
+        "description": "A jQuery plugin that manages adding, deleting and moving elements from a Symfony collection"
+    },
+    {
         "name": "ocramius/package-versions",
         "version": "1.3.0",
         "version_normalized": "1.3.0.0",

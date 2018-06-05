@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 
+use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\NumberType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
@@ -20,6 +21,7 @@ use App\Entity\Product;
 use App\Entity\ProductCategory;
 
 use App\Form\ManufacturerType;
+use App\Form\ProductType;
 
 class ManufacturerController extends Controller
 {
@@ -28,48 +30,30 @@ class ManufacturerController extends Controller
     /**
      * Initialize a Form for each Manufacturer to add a product
      */
-    private function initManufacturerProductForm($manufacturer)
+    private function initManufacturerProductForm($manufacturer, $data)
     {   
-        $form = $this->createFormBuilder()
-            ->add('name', TextType::class, array(
-                  'label' => false,
-                  'attr' => array(
-                  'placeholder' => 'Nom du produit'
-            )))
-            ->add('category', EntityType::class, array(
-                  'class' => ProductCategory::class,
-                  'choice_label' => 'category',
-                  'label' => false,
-                  'placeholder' => 'Categorie',
-                  'attr' => array(
-                      'class' => 'form-choice'
-            )))
-            ->add('description', TextType::class, array(
-                  'required' => false,
-                  'label' => false,
-                  'attr' => array(
-                      'placeholder' => 'Description'
-            )))
-            ->add('dose', NumberType::class, array(
-                  'required' => false,
-                  'label' => false,
-                  'attr' => array(
-                      'placeholder' => 'Dose (en mg)'
-              )))
-            ->add('price', MoneyType::class, array(
-                  'currency' => '',
-                  'label' => false,
-                  'attr' => array(
-                      'placeholder' => 'Prix'
-            )))
-            ->add('thumbnail', FileType::class, array(
-                'label' => false,
-                'attr' => array(
-                    'placeholder' => 'Image'
-            )))
-            ->getForm();
+        $form = $this
+           ->createFormBuilder($data)
+           ->add('values', CollectionType::class, [
+               'entry_type'    => EntityType::class,
+               'entry_options' => [
+                   'label' => 'Value',
+                   'class' => Product::class,
+               ],
+               'label'        => '',
+               'allow_add'    => true,
+               'allow_delete' => true,
+               'prototype'    => true,
+               'required'     => false,
+               'mapped' => false,
+               'attr'         => [
+                   'class' => 'collectionSelector-' . $manufacturer->getId(),
+               ],
+           ])
+           ->add('submit', SubmitType::class)
+           ->getForm();
 
-        return ($form);
+           return ($form);
     }
 
      /**
@@ -78,7 +62,7 @@ class ManufacturerController extends Controller
     private function initManufacturerMemberForm($usersRepo)
     {      
       $form = $this->createFormBuilder()
-          ->add('category', EntityType::class, array(
+          ->add('user', EntityType::class, array(
             'class' => User::class,
             'choice_label' => 'username',
             'label' => false,
@@ -122,6 +106,24 @@ class ManufacturerController extends Controller
         return ($product);
     }
 
+        /**
+     * Initialize a Form for each Manufacturer to add a product
+     */
+    private function saveManufacturerMember($form)
+    {
+        dump($form);
+
+        $em = $this->getDoctrine()->getManager();
+        $user = $this->getDoctrine()->getRepository(User::class)->find($form['formData']->get('user')->getData()->getId());
+        $manufacturer = $this->getDoctrine()->getRepository(Manufacturer::class)->find($form['manufacturerId']);
+        
+        $user->setManufacturer($manufacturer);
+
+        $em->flush();
+
+        return ($user);
+    }
+
     // Public Methods
 
 
@@ -143,15 +145,22 @@ class ManufacturerController extends Controller
         $i = 0;
         $productForms = array();
         foreach ($manufacturers as $manufacturer) {
-            $formData = $this->initManufacturerProductForm($manufacturer);
+            $data = ['values' => ['a', 'b', 'c']];
+            $formData = $this->initManufacturerProductForm($manufacturer, $data);
             $formView = $formData->createView();
             $productForms[$i++] = array(
                 'formId' => $i,
                 'manufacturerId' => $manufacturer->getID(),
+                'collectionData' => $data,
                 'formData' => $formData,
                 'formView' => $formView,
             );
         }
+        
+        /*$form->handleRequest($request);
+        if ($form->isValid()) {
+            $data = $form->getData();
+        }*/
         
         $i = 0;
         $memberForms = array();
@@ -166,6 +175,7 @@ class ManufacturerController extends Controller
             );
         }
 
+
         // Handle Request to create a Manufacturer
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -176,29 +186,12 @@ class ManufacturerController extends Controller
             return $this->redirectToRoute('manufacturers');
         }
 
-        $count = 0;
-
-        // Handle Request to add a Product to a Manufacturer
-        foreach ($productForms as $pform)
-        {
-            $count++;
-
-            $pform['formData']->handleRequest($request);
-            if ($pform['formData']->isSubmitted() && $pform['formData']->isValid()) {
-
-                $this->saveManufacturerProduct($pform);
-    
-               return $this->redirectToRoute('manufacturers');
-            }
-
-        }
 
         return $this->render('manufacturers.html.twig', array(
             'manufacturers' => $manufacturers,
             'form' => $form->createView(),
             'productforms' => $productForms,
             'memberforms' => $memberForms,
-            'submittedForms' => $count
         ));
     }
 }

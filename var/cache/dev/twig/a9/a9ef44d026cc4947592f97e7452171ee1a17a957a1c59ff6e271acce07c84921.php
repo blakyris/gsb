@@ -57,6 +57,10 @@ class __TwigTemplate_cd9fc02ea1afdb92ce1d8573ba36568a21bc08cd23edd48f9c3a9966436
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js\"></script>
   <script type='text/javascript' src=\"https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js\"></script>
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/fr.js\"></script>
+  <script src=\"";
+        // line 14
+        echo twig_escape_filter($this->env, $this->extensions['Symfony\Bridge\Twig\Extension\AssetExtension']->getAssetUrl("js/jquery.collection.js"), "html", null, true);
+        echo "\"></script>
   <script>
       \$(\"#menu-toggle\").click(function(e) {
         e.preventDefault();
@@ -93,7 +97,7 @@ class __TwigTemplate_cd9fc02ea1afdb92ce1d8573ba36568a21bc08cd23edd48f9c3a9966436
 
     public function getDebugInfo()
     {
-        return array (  48 => 2,  30 => 1,);
+        return array (  62 => 14,  48 => 2,  30 => 1,);
     }
 
     public function getSourceContext()
@@ -111,6 +115,7 @@ class __TwigTemplate_cd9fc02ea1afdb92ce1d8573ba36568a21bc08cd23edd48f9c3a9966436
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.21.0/moment.min.js\"></script>
   <script type='text/javascript' src=\"https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/fullcalendar.min.js\"></script>
   <script src=\"https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.9.0/locale/fr.js\"></script>
+  <script src=\"{{ asset('js/jquery.collection.js') }}\"></script>
   <script>
       \$(\"#menu-toggle\").click(function(e) {
         e.preventDefault();

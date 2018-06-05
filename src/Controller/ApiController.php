@@ -6,6 +6,12 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
+use Symfony\Component\Security\Core\Exception\AccessDeniedException;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 use App\Entity\CalendarEvents;
 use App\Entity\User;
@@ -13,6 +19,16 @@ use App\Entity\Product;
 use App\Entity\ProductCategory;
 use App\Entity\Manufacturer;
 use App\Entity\Doctor;
+
+
+/*
+
+Pas 2 evenements en meme temps pour un meme utilisateur
+Pas 2 produits completement identiques
+Pas 2 utilisateur identique.
+Pas de RDV le weekend
+
+*/
 
 class ApiController extends Controller
 {
@@ -29,13 +45,36 @@ class ApiController extends Controller
       return ($data);
     }
 
+    /* ----------------------------------------------------- */
 
     /**
-     * @Route("/api", name="api")
+     * @Route("/api/login", name="api_login")
      */
-    public function index()
+    public function jsonLogin(Request $requests)
     {
+      return $this->redirectToRoute('api_user');
+    }
 
+    /**
+     * @Route("/api/user", name="api_user")
+     */
+    public function jsonUser()
+    {
+      $response = new JsonResponse();
+      $user = $this->getUser();
+
+      $data = array(
+        'id' => $user->getId(),
+        'firstname' => $user->getFirstname(),
+        'lastname' => $user->getLastname(),
+        'birthdate' => date_format($user->getBirthdate(), "d-m-Y"),
+        'email' => $user->getEmail(),
+        'username' => $user->getUsername(),
+      );
+
+      $response->setData($data);
+
+      return ($response);
     }
 
    /**
@@ -60,7 +99,7 @@ class ApiController extends Controller
     }
 
        /**
-    * @Route("/api/get/product/{id}", name="api_get_products")
+    * @Route("/api/get/product/{id}", name="api_get_one_product")
     */
     public function apiGetProductById($id)
     {
@@ -97,7 +136,7 @@ class ApiController extends Controller
 
         $data[$i++] = array(
           'name' => $item->getName(),
-          'addresss' => $item->getAddress(),
+          'address' => $item->getAddress(),
           'zip' => $item->getZip(),
           'city' => $item->getCity(),
           'phone' => $item->getPhone()

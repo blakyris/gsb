@@ -11,10 +11,11 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 
         $this->source = $this->getSourceContext();
 
-        // line 1
-        $this->parent = $this->loadTemplate("base/base.html.twig", "manufacturers.html.twig", 1);
+        // line 2
+        $this->parent = $this->loadTemplate("base/base.html.twig", "manufacturers.html.twig", 2);
         $this->blocks = array(
             'content' => array($this, 'block_content'),
+            'footer' => array($this, 'block_footer'),
         );
     }
 
@@ -31,8 +32,10 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "manufacturers.html.twig"));
 
+        // line 1
         $context["page_title"] = "Liste des médicaments";
         $context["thumbnail_path"] = (twig_get_attribute($this->env, $this->source, twig_get_attribute($this->env, $this->source, (isset($context["app"]) || array_key_exists("app", $context) ? $context["app"] : (function () { throw new Twig_Error_Runtime('Variable "app" does not exist.', 1, $this->source); })()), "request", array()), "getSchemeAndHttpHost", array(), "method") . "/media/img/products-thumbnails/");
+        // line 2
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
@@ -42,6 +45,7 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 
     }
 
+    // line 4
     public function block_content($context, array $blocks = array())
     {
         $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
@@ -50,14 +54,9 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
         $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
-        // line 2
+        // line 5
         echo "
 <h2>Laboratoires</h2>
-
-<h3>";
-        // line 5
-        echo twig_escape_filter($this->env, (isset($context["submittedForms"]) || array_key_exists("submittedForms", $context) ? $context["submittedForms"] : (function () { throw new Twig_Error_Runtime('Variable "submittedForms" does not exist.', 5, $this->source); })()), "html", null, true);
-        echo " submitted forms.</h3>
 
 <button type=\"button\" class=\"btn darkblue-btn square-btn\" data-toggle=\"modal\" data-target=\"#manufacturerAddModal\">
   Ajouter un laboratoire
@@ -66,31 +65,31 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 <div class=\"manufacturers container-fluid\">
 
   ";
-        // line 13
+        // line 14
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["manufacturers"]) || array_key_exists("manufacturers", $context) ? $context["manufacturers"] : (function () { throw new Twig_Error_Runtime('Variable "manufacturers" does not exist.', 13, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["manufacturers"]) || array_key_exists("manufacturers", $context) ? $context["manufacturers"] : (function () { throw new Twig_Error_Runtime('Variable "manufacturers" does not exist.', 14, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["manufacturer"]) {
-            // line 14
+            // line 15
             echo "
   <div class=\"manufacturer-item\">
     <div class=\"manufacturer-content\">
       <h4 class=\"manufacturer-name\">";
-            // line 17
+            // line 18
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "name", array()), "html", null, true);
             echo "</h4>
       <div class=\"manufacturer-addr\">
         <p>";
-            // line 19
+            // line 20
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "address", array()), "html", null, true);
             echo "</p>
         <p>";
-            // line 20
+            // line 21
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "zip", array()), "html", null, true);
             echo ", ";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "city", array()), "html", null, true);
             echo "</p>
         <p>";
-            // line 21
+            // line 22
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "country", array()), "html", null, true);
             echo "</p>
       </div>
@@ -98,7 +97,7 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
     <div class=\"manufacturer-button\">
       <p>+ d'infos</p>
       <div data-toggle=\"modal\" data-target=\"#manufacturerEditModal-";
-            // line 26
+            // line 27
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "id", array()), "html", null, true);
             echo "\"><i class=\"far fa-arrow-alt-circle-right\"></i></div>
     </div>
@@ -106,14 +105,14 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 
   <!-- Manufacturer Edit Modal -->
   <div class=\"modal fade modal-form\" id=\"manufacturerEditModal-";
-            // line 31
+            // line 32
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "id", array()), "html", null, true);
             echo "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"manufacturerAddModalLabel\" aria-hidden=\"true\">
     <div class=\"modal-dialog\" role=\"document\">
       <div class=\"modal-content\">
         <div class=\"modal-header\">
           <h5 class=\"modal-title\" id=\"manufacturerEditModal-";
-            // line 35
+            // line 36
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "id", array()), "html", null, true);
             echo "\">Laboratoire ";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "name", array()), "html", null, true);
@@ -127,26 +126,26 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
               <div class=\"manufacturer-addr\">
                 <p><b style=\"font-size: 12px;\">Adresse : </b></p>
                 <p>";
-            // line 44
+            // line 45
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "address", array()), "html", null, true);
             echo "</p>
                 <p>";
-            // line 45
+            // line 46
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "zip", array()), "html", null, true);
             echo ", ";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "city", array()), "html", null, true);
             echo "</p>
                 <p>";
-            // line 46
+            // line 47
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "country", array()), "html", null, true);
             echo "</p>
                 </br>
                 <p><b style=\"font-size: 12px;\">Telephone :</b> ";
-            // line 48
+            // line 49
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "phone", array()), "html", null, true);
             echo "</p>
                 <p><b style=\"font-size: 12px;\">Email :</b> ";
-            // line 49
+            // line 50
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "email", array()), "html", null, true);
             echo "</p>
               </div>
@@ -161,24 +160,24 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
                   <th>Quantité en stock</th>
                 </tr>
                 ";
-            // line 61
+            // line 62
             if ( !(null === twig_get_attribute($this->env, $this->source, $context["manufacturer"], "products", array()))) {
                 echo " ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["manufacturer"], "products", array()));
                 foreach ($context['_seq'] as $context["_key"] => $context["product"]) {
-                    // line 62
+                    // line 63
                     echo "                <tr>
                   <td>";
-                    // line 63
+                    // line 64
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "name", array()), "html", null, true);
                     echo "</td>
                   <td>";
-                    // line 64
+                    // line 65
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "dose", array()), "html", null, true);
                     echo "</td>
                   <td>";
-                    // line 65
+                    // line 66
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["product"], "quantity", array()), "html", null, true);
                     echo " </td>
                 </tr>
@@ -187,13 +186,13 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['product'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 67
+                // line 68
                 echo " ";
             }
-            // line 68
+            // line 69
             echo "              </table>
               <button type=\"button\" class=\"btn darkblue-btn square-btn\" data-dismiss=\"modal\" data-toggle=\"modal\" data-target=\"#AddProductModal-";
-            // line 69
+            // line 70
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "id", array()), "html", null, true);
             echo "\">
               <i class=\"fas fa-plus\"></i> Ajouter un produit
@@ -210,26 +209,26 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
                 </tr>
 
                 ";
-            // line 83
+            // line 84
             if ( !(null === twig_get_attribute($this->env, $this->source, $context["manufacturer"], "members", array()))) {
                 echo " ";
                 $context['_parent'] = $context;
                 $context['_seq'] = twig_ensure_traversable(twig_get_attribute($this->env, $this->source, $context["manufacturer"], "members", array()));
                 foreach ($context['_seq'] as $context["_key"] => $context["member"]) {
-                    // line 84
+                    // line 85
                     echo "                <tr>
                   <td>";
-                    // line 85
+                    // line 86
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["member"], "firstname", array()), "html", null, true);
                     echo " ";
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["member"], "lastname", array()), "html", null, true);
                     echo " </td>
                   <td>";
-                    // line 86
+                    // line 87
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["member"], "email", array()), "html", null, true);
                     echo "</td>
                   <td>";
-                    // line 87
+                    // line 88
                     echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["member"], "role", array()), "html", null, true);
                     echo " </td>
                 </tr>
@@ -238,14 +237,14 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
                 $_parent = $context['_parent'];
                 unset($context['_seq'], $context['_iterated'], $context['_key'], $context['member'], $context['_parent'], $context['loop']);
                 $context = array_intersect_key($context, $_parent) + $_parent;
-                // line 89
+                // line 90
                 echo " ";
             }
-            // line 90
+            // line 91
             echo "
               </table>
               <button type=\"button\" class=\"btn darkblue-btn square-btn\" data-dismiss=\"modal\" data-toggle=\"modal\" data-target=\"#AddMemberModal-";
-            // line 92
+            // line 93
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["manufacturer"], "id", array()), "html", null, true);
             echo "\">
               <i class=\"fas fa-plus\"></i> Ajouter un membre
@@ -267,22 +266,22 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['manufacturer'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 108
+        // line 109
         echo "
 </div>
 
 <!-- MODAL DIALOGS -->
 
 ";
-        // line 113
+        // line 114
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["productforms"]) || array_key_exists("productforms", $context) ? $context["productforms"] : (function () { throw new Twig_Error_Runtime('Variable "productforms" does not exist.', 113, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["productforms"]) || array_key_exists("productforms", $context) ? $context["productforms"] : (function () { throw new Twig_Error_Runtime('Variable "productforms" does not exist.', 114, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["productform"]) {
-            // line 114
+            // line 115
             echo "
 <!-- Manufacturer Add Product Modal -->
 <div class=\"modal fade modal-form\" id=\"AddProductModal-";
-            // line 116
+            // line 117
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["productform"], "manufacturerId", array()), "html", null, true);
             echo "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"AddProductModal-";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["productform"], "manufacturerId", array()), "html", null, true);
@@ -291,18 +290,18 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
     <div class=\"modal-content\">
       <div class=\"modal-header\">
         <h5 class=\"modal-title\" id=\"AddProductModal-";
-            // line 120
+            // line 121
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["productform"], "manufacturerId", array()), "html", null, true);
             echo "\">Ajouter un produit</h5>
       </div>
       <div class=\"modal-body\">
 
         ";
-            // line 124
+            // line 125
             echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock(twig_get_attribute($this->env, $this->source, $context["productform"], "formView", array()), 'form_start', array("attr" => array("id" => ("ManufacturerAddProductForm-" . twig_get_attribute($this->env, $this->source, $context["productform"], "manufacturerId", array())), "class" => "manufacturer-add-product-form")));
             echo " 
         ";
-            // line 125
+            // line 126
             echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock(twig_get_attribute($this->env, $this->source, $context["productform"], "formView", array()), 'form_end');
             echo "
 
@@ -310,7 +309,7 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
       <div class=\"modal-footer\">
         <button type=\"button\" class=\"btn red-btn square-btn\" data-dismiss=\"modal\">Fermer</button>
         <button type=\"submit\" class=\"btn blue-btn square-btn\" form=\"ManufacturerAddProductForm-";
-            // line 130
+            // line 131
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["productform"], "manufacturerId", array()), "html", null, true);
             echo "\">Ajouter</button>
       </div>
@@ -323,16 +322,19 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['productform'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 136
-        echo " ";
+        // line 137
+        echo " 
+
+";
+        // line 139
         $context['_parent'] = $context;
-        $context['_seq'] = twig_ensure_traversable((isset($context["memberforms"]) || array_key_exists("memberforms", $context) ? $context["memberforms"] : (function () { throw new Twig_Error_Runtime('Variable "memberforms" does not exist.', 136, $this->source); })()));
+        $context['_seq'] = twig_ensure_traversable((isset($context["memberforms"]) || array_key_exists("memberforms", $context) ? $context["memberforms"] : (function () { throw new Twig_Error_Runtime('Variable "memberforms" does not exist.', 139, $this->source); })()));
         foreach ($context['_seq'] as $context["_key"] => $context["memberform"]) {
-            // line 137
+            // line 140
             echo "
 <!-- Manufacturer Add Member Modal -->
 <div class=\"modal fade modal-form\" id=\"AddMemberModal-";
-            // line 139
+            // line 142
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["memberform"], "manufacturerId", array()), "html", null, true);
             echo "\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"AddMemberModal-";
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["memberform"], "manufacturerId", array()), "html", null, true);
@@ -341,16 +343,18 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
     <div class=\"modal-content\">
       <div class=\"modal-header\">
         <h5 class=\"modal-title\" id=\"AddMemberModal-";
-            // line 143
+            // line 146
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["memberform"], "manufacturerId", array()), "html", null, true);
             echo "\">Ajouter un produit</h5>
       </div>
       <div class=\"modal-body\">
 
         ";
-            // line 147
+            // line 150
             echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock(twig_get_attribute($this->env, $this->source, $context["memberform"], "formView", array()), 'form_start', array("attr" => array("id" => ("ManufacturerAddMemberForm-" . twig_get_attribute($this->env, $this->source, $context["memberform"], "manufacturerId", array())), "class" => "manufacturer-add-member-form")));
-            echo " ";
+            echo "
+        ";
+            // line 151
             echo             $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock(twig_get_attribute($this->env, $this->source, $context["memberform"], "formView", array()), 'form_end');
             echo "
 
@@ -358,7 +362,7 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
       <div class=\"modal-footer\">
         <button type=\"button\" class=\"btn red-btn square-btn\" data-dismiss=\"modal\">Fermer</button>
         <button type=\"submit\" class=\"btn blue-btn square-btn\" form=\"ManufacturerAddMemberForm-";
-            // line 152
+            // line 156
             echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["memberform"], "manufacturerId", array()), "html", null, true);
             echo "\">Ajouter</button>
       </div>
@@ -371,7 +375,7 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['memberform'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 159
+        // line 163
         echo "
 
 <!-- Manufacturer Add Modal -->
@@ -387,37 +391,37 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
       <div class=\"modal-body\">
 
         ";
-        // line 173
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 173, $this->source); })()), 'form_start', array("attr" => array("id" => "createManufacturerForm", "class" => "create-manufacturer-form")));
+        // line 177
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 177, $this->source); })()), 'form_start', array("attr" => array("id" => "createManufacturerForm", "class" => "create-manufacturer-form")));
         echo " 
           ";
-        // line 174
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 174, $this->source); })()), "name", array()), 'row');
-        echo "
-          ";
-        // line 175
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 175, $this->source); })()), "address", array()), 'row');
-        echo "
-          ";
-        // line 176
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 176, $this->source); })()), "zip", array()), 'row');
-        echo "
-          ";
-        // line 177
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 177, $this->source); })()), "city", array()), 'row');
-        echo "
-          ";
         // line 178
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 178, $this->source); })()), "country", array()), 'row');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 178, $this->source); })()), "name", array()), 'row');
         echo "
           ";
         // line 179
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 179, $this->source); })()), "phone", array()), 'row');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 179, $this->source); })()), "address", array()), 'row');
+        echo "
+          ";
         // line 180
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 180, $this->source); })()), "zip", array()), 'row');
+        echo "
+          ";
+        // line 181
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 181, $this->source); })()), "city", array()), 'row');
+        echo "
+          ";
+        // line 182
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 182, $this->source); })()), "country", array()), 'row');
+        echo "
+          ";
+        // line 183
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 183, $this->source); })()), "phone", array()), 'row');
+        // line 184
         echo " ";
-        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 180, $this->source); })()), "email", array()), 'row');
+        echo $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->searchAndRenderBlock(twig_get_attribute($this->env, $this->source, (isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 184, $this->source); })()), "email", array()), 'row');
         echo " ";
-        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 180, $this->source); })()), 'form_end');
+        echo         $this->env->getRuntime('Symfony\Component\Form\FormRenderer')->renderBlock((isset($context["form"]) || array_key_exists("form", $context) ? $context["form"] : (function () { throw new Twig_Error_Runtime('Variable "form" does not exist.', 184, $this->source); })()), 'form_end');
         echo "
 
       </div>
@@ -439,6 +443,50 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 
     }
 
+    // line 198
+    public function block_footer($context, array $blocks = array())
+    {
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e = $this->extensions["Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension"];
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->enter($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
+
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02 = $this->extensions["Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension"];
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->enter($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "footer"));
+
+        // line 199
+        echo "
+  ";
+        // line 200
+        $this->displayParentBlock("footer", $context, $blocks);
+        echo "
+
+  ";
+        // line 202
+        $context['_parent'] = $context;
+        $context['_seq'] = twig_ensure_traversable((isset($context["productforms"]) || array_key_exists("productforms", $context) ? $context["productforms"] : (function () { throw new Twig_Error_Runtime('Variable "productforms" does not exist.', 202, $this->source); })()));
+        foreach ($context['_seq'] as $context["_key"] => $context["form"]) {
+            // line 203
+            echo "    <script type=\"text/javascript\">
+      \$('.collectionSelector-";
+            // line 204
+            echo twig_escape_filter($this->env, twig_get_attribute($this->env, $this->source, $context["form"], "manufacturerId", array()), "html", null, true);
+            echo "').collection();
+    </script>
+  ";
+        }
+        $_parent = $context['_parent'];
+        unset($context['_seq'], $context['_iterated'], $context['_key'], $context['form'], $context['_parent'], $context['loop']);
+        $context = array_intersect_key($context, $_parent) + $_parent;
+        // line 207
+        echo "
+";
+        
+        $__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02->leave($__internal_319393461309892924ff6e74d6d6e64287df64b63545b994e100d4ab223aed02_prof);
+
+        
+        $__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e->leave($__internal_085b0142806202599c7fe3b329164a92397d8978207a37e79d70b8c52599e33e_prof);
+
+    }
+
     public function getTemplateName()
     {
         return "manufacturers.html.twig";
@@ -451,16 +499,17 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 
     public function getDebugInfo()
     {
-        return array (  417 => 180,  415 => 179,  411 => 178,  407 => 177,  403 => 176,  399 => 175,  395 => 174,  391 => 173,  375 => 159,  362 => 152,  352 => 147,  345 => 143,  336 => 139,  332 => 137,  327 => 136,  314 => 130,  306 => 125,  302 => 124,  295 => 120,  286 => 116,  282 => 114,  278 => 113,  271 => 108,  249 => 92,  245 => 90,  242 => 89,  233 => 87,  229 => 86,  223 => 85,  220 => 84,  214 => 83,  197 => 69,  194 => 68,  191 => 67,  182 => 65,  178 => 64,  174 => 63,  171 => 62,  165 => 61,  150 => 49,  146 => 48,  141 => 46,  135 => 45,  131 => 44,  117 => 35,  110 => 31,  102 => 26,  94 => 21,  88 => 20,  84 => 19,  79 => 17,  74 => 14,  70 => 13,  59 => 5,  54 => 2,  15 => 1,);
+        return array (  480 => 207,  471 => 204,  468 => 203,  464 => 202,  459 => 200,  456 => 199,  447 => 198,  421 => 184,  419 => 183,  415 => 182,  411 => 181,  407 => 180,  403 => 179,  399 => 178,  395 => 177,  379 => 163,  366 => 156,  358 => 151,  354 => 150,  347 => 146,  338 => 142,  334 => 140,  330 => 139,  326 => 137,  313 => 131,  305 => 126,  301 => 125,  294 => 121,  285 => 117,  281 => 115,  277 => 114,  270 => 109,  248 => 93,  244 => 91,  241 => 90,  232 => 88,  228 => 87,  222 => 86,  219 => 85,  213 => 84,  196 => 70,  193 => 69,  190 => 68,  181 => 66,  177 => 65,  173 => 64,  170 => 63,  164 => 62,  149 => 50,  145 => 49,  140 => 47,  134 => 46,  130 => 45,  116 => 36,  109 => 32,  101 => 27,  93 => 22,  87 => 21,  83 => 20,  78 => 18,  73 => 15,  69 => 14,  58 => 5,  49 => 4,  39 => 2,  36 => 1,  15 => 2,);
     }
 
     public function getSourceContext()
     {
-        return new Twig_Source("{% set page_title = 'Liste des médicaments' %} {% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ \"/media/img/products-thumbnails/\" %} {% extends 'base/base.html.twig' %} {% block content %}
+        return new Twig_Source("{% set page_title = 'Liste des médicaments' %} {% set thumbnail_path = app.request.getSchemeAndHttpHost() ~ \"/media/img/products-thumbnails/\" %} 
+{% extends 'base/base.html.twig' %} 
+
+{% block content %}
 
 <h2>Laboratoires</h2>
-
-<h3>{{ submittedForms }} submitted forms.</h3>
 
 <button type=\"button\" class=\"btn darkblue-btn square-btn\" data-toggle=\"modal\" data-target=\"#manufacturerAddModal\">
   Ajouter un laboratoire
@@ -591,7 +640,9 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
   </div>
 </div>
 
-{% endfor %} {% for memberform in memberforms %}
+{% endfor %} 
+
+{% for memberform in memberforms %}
 
 <!-- Manufacturer Add Member Modal -->
 <div class=\"modal fade modal-form\" id=\"AddMemberModal-{{ memberform.manufacturerId }}\" tabindex=\"-1\" role=\"dialog\" aria-labelledby=\"AddMemberModal-{{ memberform.manufacturerId }}\" aria-hidden=\"true\">
@@ -602,7 +653,8 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
       </div>
       <div class=\"modal-body\">
 
-        {{ form_start(memberform.formView, {'attr': {'id': 'ManufacturerAddMemberForm-' ~ memberform.manufacturerId, 'class': 'manufacturer-add-member-form'}}) }} {{ form_end(memberform.formView) }}
+        {{ form_start(memberform.formView, {'attr': {'id': 'ManufacturerAddMemberForm-' ~ memberform.manufacturerId, 'class': 'manufacturer-add-member-form'}}) }}
+        {{ form_end(memberform.formView) }}
 
       </div>
       <div class=\"modal-footer\">
@@ -648,6 +700,17 @@ class __TwigTemplate_b41a13c63fd178ef8048a849a68eaefd329d00281e6898228062dc6c5cd
 </div>
 
 {% endblock %}
-", "manufacturers.html.twig", "/Users/sebastien/Sites/gsb/templates/manufacturers.html.twig");
+
+{% block footer %}
+
+  {{ parent() }}
+
+  {% for form in productforms %}
+    <script type=\"text/javascript\">
+      \$('.collectionSelector-{{ form.manufacturerId }}').collection();
+    </script>
+  {% endfor %}
+
+{% endblock %}", "manufacturers.html.twig", "/Users/sebastien/Sites/gsb/templates/manufacturers.html.twig");
     }
 }
