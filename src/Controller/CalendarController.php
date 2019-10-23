@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -12,6 +13,9 @@ use App\Entity\CalendarEvents;
 use App\Entity\User;
 use App\Form\CalendarEventType;
 
+/**
+* @IsGranted("ROLE_USER")
+*/
 class CalendarController extends Controller
 {
     /**

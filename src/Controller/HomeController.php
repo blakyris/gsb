@@ -13,6 +13,8 @@ class HomeController extends Controller
   */
   public function show()
   {
-    return $this->render('base/base.html.twig');
+    $this->denyAccessUnlessGranted('IS_AUTHENTICATED_FULLY');
+
+    return $this->redirectToRoute('user_account');
   }
 }

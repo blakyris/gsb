@@ -7,10 +7,14 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Request;
 use App\Entity\Product;
 use App\Form\ProductType;
 
+/**
+* @IsGranted("ROLE_USER")
+*/
 class ProductController extends Controller
 {
   /**

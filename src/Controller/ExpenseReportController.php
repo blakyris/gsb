@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -11,6 +12,9 @@ use App\Entity\User;
 use App\Entity\ExpenseReport;
 use App\Form\ExpenseReportType;
 
+/**
+* @IsGranted("ROLE_USER")
+*/
 class ExpenseReportController extends Controller
 {
     /**
@@ -26,7 +30,6 @@ class ExpenseReportController extends Controller
       $repository = $this->getDoctrine()->getRepository(ExpenseReport::class);
       $reports = $repository->findAll();
 
-      // handle the submit (will only happen on POST)
       $form->handleRequest($request);
       if ($form->isSubmitted() && $form->isValid()) {
           $currentUser = $this->getDoctrine()->getRepository(User::class)->find($this->getUser()->getId());
@@ -44,7 +47,6 @@ class ExpenseReportController extends Controller
           $file->move($directory, $filename);
           $report->setAttachement($filename);
 
-          // save the Report
           $em = $this->getDoctrine()->getManager();
           $em->persist($report);
           $em->flush();

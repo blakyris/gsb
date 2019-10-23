@@ -36,17 +36,12 @@ class SecurityController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // Encode the password
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // save the User
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            // Do what you want here before redirecting the user
 
             return $this->redirectToRoute('login');
         }
@@ -118,7 +113,6 @@ class SecurityController extends Controller
         return $this->redirectToRoute('logout');
       else
         return $this->redirectToRoute('user_registration');
-
     }
 
 }

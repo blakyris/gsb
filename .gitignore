@@ -1,7 +1,13 @@
 
 ###> symfony/framework-bundle ###
 
+/vendor/
+/bin/
 /var/cache/
+/var/log/
 
 ###< symfony/framework-bundle ###
+
 .DS_Store
+.idea
+.vscode

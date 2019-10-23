@@ -2,13 +2,17 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use App\Form\UserType;
 
+/**
+* @IsGranted("ROLE_USER")
+*/
 class UserAccountController extends Controller
 {
     /**
@@ -23,18 +27,12 @@ class UserAccountController extends Controller
 
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
-
-            // Encode the password (you could also do this via Doctrine listener)
             $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // save the User
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
-
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the users
 
             return $this->redirectToRoute('user_account');
         }

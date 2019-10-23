@@ -2,7 +2,8 @@
 
 namespace App\Controller;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,6 +24,10 @@ use App\Entity\ProductCategory;
 use App\Form\ManufacturerType;
 use App\Form\ProductType;
 
+
+/**
+* @IsGranted("ROLE_USER")
+*/
 class ManufacturerController extends Controller
 {
     // Private Methods
@@ -106,7 +111,7 @@ class ManufacturerController extends Controller
         return ($product);
     }
 
-        /**
+    /**
      * Initialize a Form for each Manufacturer to add a product
      */
     private function saveManufacturerMember($form)
@@ -156,12 +161,7 @@ class ManufacturerController extends Controller
                 'formView' => $formView,
             );
         }
-        
-        /*$form->handleRequest($request);
-        if ($form->isValid()) {
-            $data = $form->getData();
-        }*/
-        
+
         $i = 0;
         $memberForms = array();
         foreach ($manufacturers as $manufacturer) {
@@ -175,7 +175,6 @@ class ManufacturerController extends Controller
             );
         }
 
-
         // Handle Request to create a Manufacturer
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -185,7 +184,6 @@ class ManufacturerController extends Controller
 
             return $this->redirectToRoute('manufacturers');
         }
-
 
         return $this->render('manufacturers.html.twig', array(
             'manufacturers' => $manufacturers,

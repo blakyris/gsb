@@ -149,4 +149,8 @@ class Product
     {
         $this->dose = $dose;
     }
+
+    public function __toString() {
+        return $this->name;
+    }
 }
